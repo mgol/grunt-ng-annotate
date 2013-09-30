@@ -1,6 +1,6 @@
 # grunt-ng-annotate
 
-> Static scope analysis and transpilation of ES6 block scoped const and let variables, to ES3.
+> Add, remove and rebuild AngularJS dependency injection annotations.
 
 ## Getting Started
 This plugin requires Grunt.
@@ -43,11 +43,18 @@ The `ngAnnotate` task accepts a couple of options:
 {
     // Tells if ngAnnotate should add annotations (true by default).
     add: true|false,
+
     // Tells if ngAnnotate should add annotations (false by default).
     remove: true|false,
+
+    // If provided, only strings matched by the regexp are interpreted as module names.
+    // See README of ng-annotate for further details: https://npmjs.org/package/ng-annotate
+    regexp: regexp,
+
     // If files are provided without a destination, each file is processed
     // separately and each of them is saved under original name with appended suffix provided here.
     outputFileSuffix: string,
+
     // If files are provided without a destination and this option is set, each file is processed
     // separately and each of them is saved under original name processed by this function.
     transformDest: function (sourcePath) {},

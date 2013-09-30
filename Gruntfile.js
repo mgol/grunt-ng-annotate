@@ -30,6 +30,7 @@ module.exports = function (grunt) {
                 outputFileSuffix: undefined,
                 add: true,
                 remove: false,
+                regexp: undefined,
                 ngAnnotateOptions: {},
             }
         },

@@ -15,7 +15,7 @@ module.exports = function (grunt) {
         ngAnnotate = require('ng-annotate');
 
     grunt.registerMultiTask('ngAnnotate',
-        'Add, remove and rebuild angularjs dependency injection annotations',
+        'Add, remove and rebuild AngularJS dependency injection annotations',
 
         function () {
             var filesNum = 0,
@@ -43,6 +43,11 @@ module.exports = function (grunt) {
                     delete options.remove;
                 } else {
                     options.ngAnnotateOptions.remove = false;
+                }
+
+                if (options.regexp != null) {
+                    options.ngAnnotateOptions.regexp = options.regexp;
+                    delete options.regexp;
                 }
 
                 if (mapping.dest) {
