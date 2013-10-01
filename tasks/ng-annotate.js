@@ -2,8 +2,7 @@
  * grunt-ng-annotate
  * https://github.com/mzgol/grunt-ng-annotate
  *
- * Author Michał Gołębiowski <michal.golebiowski@laboratorium.ee>
- * Copyright (c) 2013 Laboratorium EE
+ * Author Michał Gołębiowski <m.goleb@gmail.com>
  * Licensed under the MIT license.
  */
 
