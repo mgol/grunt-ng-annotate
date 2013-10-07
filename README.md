@@ -44,7 +44,7 @@ The `ngAnnotate` task accepts a couple of options:
     // Tells if ngAnnotate should add annotations (true by default).
     add: true|false,
 
-    // Tells if ngAnnotate should add annotations (false by default).
+    // Tells if ngAnnotate should remove annotations (false by default).
     remove: true|false,
 
     // If provided, only strings matched by the regexp are interpreted as module names.
