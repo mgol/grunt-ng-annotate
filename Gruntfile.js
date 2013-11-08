@@ -12,14 +12,14 @@ module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
         jshint: {
+            options: {
+                jshintrc: true,
+            },
             all: [
                 'Gruntfile.js',
                 'tasks/*.js',
-                '<%= nodeunit.tests %>',
+//                '<%= nodeunit.tests %>',
             ],
-            options: {
-                jshintrc: '.jshintrc',
-            },
         },
 
         // Configuration to be run (and then tested).
@@ -45,10 +45,8 @@ module.exports = function (grunt) {
     // Actually load this plugin's task(s).
     grunt.loadTasks('tasks');
 
-    // These plugins provide necessary tasks.
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-nodeunit');
+    // Load all grunt tasks matching the `grunt-*` pattern.
+    require('load-grunt-tasks')(grunt);
 
     grunt.registerTask('test', ['nodeunit']);
 
