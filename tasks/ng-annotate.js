@@ -49,6 +49,11 @@ module.exports = function (grunt) {
                     delete options.regexp;
                 }
 
+                if (options.singleQuotes != null) {
+                    options.ngAnnotateOptions.single_quotes = options.singleQuotes;
+                    delete options.singleQuotes;
+                }
+
                 if (mapping.dest) {
                     // If destination file provided, concatenate all source files to a temporary one.
                     // In such a case options transformDest & outputFileSuffix are ignored.

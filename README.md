@@ -58,6 +58,10 @@ The `ngAnnotate` task accepts a couple of options:
     // If files are provided without a destination and this option is set, each file is processed
     // separately and each of them is saved under original name processed by this function.
     transformDest: function (sourcePath) {},
+
+    // Switches the quote type for strings in the annotations array to single ones; e.g. '$scope'
+    // instead of "$scope" (false by default).
+    singleQuotes: true|false,
 }
 ```
 
