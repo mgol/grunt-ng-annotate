@@ -70,13 +70,35 @@ annotations and then re-adds them (it can be used to check if annotations were p
 
 ### Usage Examples
 
-TODO
+```js
+grunt.initConfig({
+    ngAnnotate: {
+        options: {
+            singleQuotes: true,
+        },
+        all: {
+            files: {
+                'a.js': ['a.js'],
+                'c.js': ['b.js'],
+                'f.js': ['d.js', 'e.js'],
+            },
+        },
+    },
+});
+
+grunt.loadNpmTasks('grunt-ng-annotate');
+```
+
+After executing `grunt ngAnnotate`, you'll get file `a.js` annotated and saved under the same name, file `b.js`
+annotated and saved as `c.js` and files `d.js` and `e.js` concatenated, annotated and saved as `f.js`. Annotations
+will be saved using single quotes.
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed
+functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 _(Nothing yet)_
 
 ## License
-Copyright (c) 2013 Laboratorium EE. Licensed under the MIT license.
+Copyright (c) 2014 Michał Gołębiowski. Licensed under the MIT license.
