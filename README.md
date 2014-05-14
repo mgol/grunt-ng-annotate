@@ -1,5 +1,4 @@
-# grunt-ng-annotate
-
+# grunt-ng-annotate [![Build Status](https://travis-ci.org/mzgol/grunt-ng-annotate.svg?branch=master)](https://travis-ci.org/mzgol/grunt-ng-annotate)
 > Add, remove and rebuild AngularJS dependency injection annotations.
 
 ## Getting Started
