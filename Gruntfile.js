@@ -11,35 +11,71 @@
 module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
+        clean: {
+            test: {
+                src: ['test/tmp'],
+            },
+        },
+
         jshint: {
             options: {
                 jshintrc: true,
             },
-            all: [
-                'Gruntfile.js',
-                'tasks/*.js',
-//                '<%= nodeunit.tests %>',
-            ],
+            all: {
+                src: [
+                    'Gruntfile.js',
+                    'tasks/**/*.js',
+                    'test/**/*.js',
+                ],
+            },
+        },
+        jscs: {
+            all: {
+                src: [
+                    '<%= jshint.all.src %>',
+                    '!test/tmp/**/*.js',
+                ],
+                options: {
+                    config: '.jscs.json',
+                },
+            },
         },
 
         // Configuration to be run (and then tested).
         ngAnnotate: {
             options: {
-                transformDest: undefined,
+                transformDest: function (srcPath) {
+                    // Transform files from test/fixtures to test/tmp.
+                    return srcPath.replace(/\/fixtures\//, '/tmp/');
+                },
                 outputFileSuffix: undefined,
                 add: true,
                 remove: false,
                 regexp: undefined,
                 ngAnnotateOptions: {},
-            }
+                singleQuotes: true,
+            },
+            add: {
+                src: ['test/fixtures/not-annotated.js'],
+            },
+            remove: {
+                options: {
+                    add: false,
+                    remove: true,
+                },
+                src: ['test/fixtures/annotated.js'],
+            },
         },
 
         // Unit tests.
-        // TODO
-//        nodeunit: {
-//            tests: ['test/*_test.js'],
-//        },
-
+        mochaTest: {
+            all: {
+                options: {
+                    reporter: 'spec',
+                },
+                src: ['test/spec/*.js'],
+            },
+        },
     });
 
     // Actually load this plugin's task(s).
@@ -48,12 +84,16 @@ module.exports = function (grunt) {
     // Load all grunt tasks matching the `grunt-*` pattern.
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('test', ['nodeunit']);
-
-    // By default, lint and run all tests.
-    grunt.registerTask('default', [
+    grunt.registerTask('lint', [
         'jshint',
+        'jscs',
+    ]);
+
+    // By default, lint and run tests.
+    grunt.registerTask('default', [
+        'clean',
+        'lint',
         'ngAnnotate',
-//        'test', // TODO
+        'mochaTest',
     ]);
 };

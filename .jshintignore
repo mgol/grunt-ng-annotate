@@ -1,2 +1,1 @@
-test/fixtures/**/*.js
-test/expected/**/*.js
+test/tmp/**/*.js

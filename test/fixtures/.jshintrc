@@ -1,0 +1,31 @@
+{
+    "bitwise": true,
+    "curly": true,
+    "eqeqeq": true,
+    "eqnull": true,
+    "forin": false,
+    "immed": true,
+    "newcap": true,
+    "noarg": true,
+    "noempty": true,
+    "nonew": true,
+    "onevar": true,
+    "strict": true,
+    "trailing": true,
+    "undef": true,
+    "unused": true,
+
+    "esnext": true,
+    "browser": true,
+    "devel": true,
+    "jquery": true,
+
+    "quotmark": "single",
+    "maxerr": 50,
+    "maxlen": 120,
+
+    "globals": {
+        "angular": false,
+        "_": false
+    }
+}
