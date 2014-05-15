@@ -125,6 +125,14 @@ module.exports = function (grunt) {
                     'test/tmp/not-annotated-singlequotes.js': ['test/fixtures/not-annotated.js'],
                 },
             },
+            ngAnnotateOptions: {
+                options: {
+                    singleQuotes: true,
+                },
+                files: {
+                    'test/tmp/not-annotated-ngannotateoptions.js': ['test/fixtures/not-annotated.js'],
+                },
+            },
         },
 
         // Unit tests.

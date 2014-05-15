@@ -55,4 +55,8 @@ describe('grunt-ng-annotate API', function () {
     it('should respect the `singleQuotes` setting', function () {
         expect(readTmp('not-annotated-singlequotes.js')).to.be(readFix('annotated-single.js'));
     });
+
+    it('should pass the `ngAnnotateOptions` object to ngAnnotate', function () {
+        expect(readTmp('not-annotated-ngannotateoptions.js')).to.be(readFix('annotated-single.js'));
+    });
 });

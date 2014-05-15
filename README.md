@@ -62,6 +62,11 @@ The `ngAnnotate` task accepts a couple of options:
     // Switches the quote type for strings in the annotations array to single ones; e.g. '$scope'
     // instead of "$scope" (false by default).
     singleQuotes: true|false,
+
+    // If ngAnnotate supports a new option that is not directly supported via this grunt task yet,
+    // you can pass it here. These options gets merged with the above specific to ngAnnotate.
+    // Options passed here have lower precedence to the direct ones described above.
+    ngAnnotateOptions: {},
 }
 ```
 
