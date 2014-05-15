@@ -46,26 +46,30 @@ The `ngAnnotate` task accepts a couple of options:
     // Tells if ngAnnotate should remove annotations (false by default).
     remove: true|false,
 
-    // If provided, only strings matched by the regexp are interpreted as module names.
-    // You can provide both a regular expression and a string representing one.
-    // See README of ng-annotate for further details: https://npmjs.org/package/ng-annotate
+    // If provided, only strings matched by the regexp are interpreted as module
+    // names. You can provide both a regular expression and a string representing
+    // one. See README of ng-annotate for further details:
+    // https://npmjs.org/package/ng-annotate
     regexp: regexp,
 
     // If files are provided without a destination, each file is processed
-    // separately and each of them is saved under original name with appended suffix provided here.
+    // separately and each of them is saved under original name with appended
+    // suffix provided here.
     outputFileSuffix: string,
 
-    // If files are provided without a destination and this option is set, each file is processed
-    // separately and each of them is saved under original name processed by this function.
+    // If files are provided without a destination and this option is set,
+    // each file is processed separately and each of them is saved under original
+    // name processed by this function.
     transformDest: function (sourcePath) {},
 
-    // Switches the quote type for strings in the annotations array to single ones; e.g. '$scope'
-    // instead of "$scope" (false by default).
+    // Switches the quote type for strings in the annotations array to single
+    // ones; e.g. '$scope' instead of "$scope" (false by default).
     singleQuotes: true|false,
 
-    // If ngAnnotate supports a new option that is not directly supported via this grunt task yet,
-    // you can pass it here. These options gets merged with the above specific to ngAnnotate.
-    // Options passed here have lower precedence to the direct ones described above.
+    // If ngAnnotate supports a new option that is not directly supported via
+    // this grunt task yet, you can pass it here. These options gets merged
+    // with the above specific to ngAnnotate. Options passed here have lower
+    // precedence to the direct ones described above.
     ngAnnotateOptions: {},
 }
 ```
@@ -101,9 +105,6 @@ will be saved using single quotes.
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed
 functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-## Release History
-_(Nothing yet)_
 
 ## License
 Copyright (c) 2014 Michał Gołębiowski. Licensed under the MIT license.
