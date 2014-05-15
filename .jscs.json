@@ -56,7 +56,9 @@
     "requireDotNotation": true,
 
     "excludeFiles": [
-        "node_modules/**"
+        "node_modules/**",
+        "test/tmp/**",
+        "test/fixtures/**"
     ],
 
     "additionalRules": ["node_modules/jscs-trailing-comma/rules/*.js"],

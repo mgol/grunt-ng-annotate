@@ -44,26 +44,86 @@ module.exports = function (grunt) {
         // Configuration to be run (and then tested).
         ngAnnotate: {
             options: {
-                transformDest: function (srcPath) {
-                    // Transform files from test/fixtures to test/tmp.
-                    return srcPath.replace(/\/fixtures\//, '/tmp/');
-                },
-                outputFileSuffix: undefined,
-                add: true,
-                remove: false,
-                regexp: undefined,
                 ngAnnotateOptions: {},
-                singleQuotes: true,
+            },
+            default: {
+                files: {
+                    'test/tmp/partially-annotated-messy-default.js': ['test/fixtures/partially-annotated-messy.js'],
+                },
             },
             add: {
-                src: ['test/fixtures/not-annotated.js'],
+                options: {
+                    add: true,
+                    remove: false,
+                },
+                files: {
+                    'test/tmp/not-annotated.js': ['test/fixtures/not-annotated.js'],
+                },
             },
             remove: {
                 options: {
                     add: false,
                     remove: true,
                 },
-                src: ['test/fixtures/annotated.js'],
+                files: {
+                    'test/tmp/annotated.js': ['test/fixtures/annotated.js'],
+                },
+            },
+            addRemove: {
+                options: {
+                    add: true,
+                    remove: true,
+                },
+                files: {
+                    'test/tmp/partially-annotated-messy-addremove.js': ['test/fixtures/partially-annotated-messy.js'],
+                },
+            },
+            regexp: {
+                options: {
+                    add: true,
+                    remove: true,
+                    regexp: /^matchedMod$/,
+                },
+                files: {
+                    'test/tmp/not-annotated-regexp.js': ['test/fixtures/not-annotated.js'],
+                },
+            },
+            srcDest: {
+                files: {
+                    'test/tmp/concatenated.js': [
+                        'test/tmp/not-annotated.js',
+                        'test/tmp/annotated.js',
+                    ],
+                },
+            },
+            outputFileSuffix: {
+                options: {
+                    add: true,
+                    remove: true,
+                    outputFileSuffix: '-suffix',
+                    transformDest: null,
+                },
+                src: ['test/tmp/not-annotated.js'],
+            },
+            transformDest: {
+                options: {
+                    add: true,
+                    remove: true,
+                    transformDest: function (srcPath) {
+                        return srcPath.replace(/\/fixtures\//, '/tmp/').replace(/\.js/, '.es5');
+                    },
+                },
+                src: ['test/fixtures/not-annotated.js'],
+            },
+            singleQuotes: {
+                options: {
+                    add: true,
+                    remove: true,
+                    singleQuotes: true,
+                },
+                files: {
+                    'test/tmp/not-annotated-singlequotes.js': ['test/fixtures/not-annotated.js'],
+                },
             },
         },
 

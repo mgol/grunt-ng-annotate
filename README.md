@@ -47,6 +47,7 @@ The `ngAnnotate` task accepts a couple of options:
     remove: true|false,
 
     // If provided, only strings matched by the regexp are interpreted as module names.
+    // You can provide both a regular expression and a string representing one.
     // See README of ng-annotate for further details: https://npmjs.org/package/ng-annotate
     regexp: regexp,
 
