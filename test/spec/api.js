@@ -59,4 +59,9 @@ describe('grunt-ng-annotate API', function () {
     it('should pass the `ngAnnotateOptions` object to ngAnnotate', function () {
         expect(readTmp('not-annotated-ngannotateoptions.js')).to.be(readFix('annotated-single.js'));
     });
+
+    it('should pass the correct options when using multiple input sources', function () {
+        expect(readTmp('multiple-1.js')).to.be(readFix('not-annotated.js'));
+        expect(readTmp('multiple-2.js')).to.be(readFix('not-annotated.js'));
+    });
 });

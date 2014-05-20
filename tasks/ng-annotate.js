@@ -22,37 +22,37 @@ module.exports = function (grunt) {
             // Merge task-specific and/or target-specific options with these defaults.
                 options = this.options();
 
+            if (!options.ngAnnotateOptions) {
+                options.ngAnnotateOptions = {};
+            }
+
+            if (options.add != null) {
+                options.ngAnnotateOptions.add = options.add;
+                delete options.add;
+            } else {
+                options.ngAnnotateOptions.add = true;
+            }
+
+            if (options.remove != null) {
+                options.ngAnnotateOptions.remove = options.remove;
+                delete options.remove;
+            } else {
+                options.ngAnnotateOptions.remove = false;
+            }
+
+            if (options.regexp != null) {
+                options.ngAnnotateOptions.regexp = options.regexp;
+                delete options.regexp;
+            }
+
+            if (options.singleQuotes != null) {
+                options.ngAnnotateOptions.single_quotes = options.singleQuotes;
+                delete options.singleQuotes;
+            }
+
             // Iterate over all specified file groups.
             this.files.forEach(function (mapping) {
                 var tmpFilePath = mapping.dest; // use the destination file as a temporary source one
-
-                if (!options.ngAnnotateOptions) {
-                    options.ngAnnotateOptions = {};
-                }
-
-                if (options.add != null) {
-                    options.ngAnnotateOptions.add = options.add;
-                    delete options.add;
-                } else {
-                    options.ngAnnotateOptions.add = true;
-                }
-
-                if (options.remove != null) {
-                    options.ngAnnotateOptions.remove = options.remove;
-                    delete options.remove;
-                } else {
-                    options.ngAnnotateOptions.remove = false;
-                }
-
-                if (options.regexp != null) {
-                    options.ngAnnotateOptions.regexp = options.regexp;
-                    delete options.regexp;
-                }
-
-                if (options.singleQuotes != null) {
-                    options.ngAnnotateOptions.single_quotes = options.singleQuotes;
-                    delete options.singleQuotes;
-                }
 
                 if (mapping.dest) {
                     // If destination file provided, concatenate all source files to a temporary one.

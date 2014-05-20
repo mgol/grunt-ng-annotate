@@ -133,6 +133,18 @@ module.exports = function (grunt) {
                     'test/tmp/not-annotated-ngannotateoptions.js': ['test/fixtures/not-annotated.js'],
                 },
             },
+            multipleFileSources: {
+                options: {
+                    add: false,
+                    remove: true,
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'test/fixtures',
+                    src: ['multiple-1.js', 'multiple-2.js'],
+                    dest: 'test/tmp',
+                }],
+            },
         },
 
         // Unit tests.
