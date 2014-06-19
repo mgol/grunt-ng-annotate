@@ -9,7 +9,8 @@
 'use strict';
 
 module.exports = function (grunt) {
-    // Project configuration.
+    require('time-grunt')(grunt);
+
     grunt.initConfig({
         clean: {
             test: {
@@ -17,23 +18,22 @@ module.exports = function (grunt) {
             },
         },
 
-        jshint: {
-            options: {
-                jshintrc: true,
+        eslint: {
+            all: {
+                src: [
+                    'Gruntfile.js',
+                    'tasks',
+                    'test',
+                ],
             },
+        },
+
+        jscs: {
             all: {
                 src: [
                     'Gruntfile.js',
                     'tasks/**/*.js',
                     'test/**/*.js',
-                ],
-            },
-        },
-        jscs: {
-            all: {
-                src: [
-                    '<%= jshint.all.src %>',
-                    '!test/tmp/**/*.js',
                 ],
                 options: {
                     config: '.jscs.json',
@@ -138,12 +138,14 @@ module.exports = function (grunt) {
                     add: false,
                     remove: true,
                 },
-                files: [{
-                    expand: true,
-                    cwd: 'test/fixtures',
-                    src: ['multiple-1.js', 'multiple-2.js'],
-                    dest: 'test/tmp',
-                }],
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'test/fixtures',
+                        src: ['multiple-1.js', 'multiple-2.js'],
+                        dest: 'test/tmp',
+                    },
+                ],
             },
         },
 
@@ -165,7 +167,7 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.registerTask('lint', [
-        'jshint',
+        'eslint',
         'jscs',
     ]);
 
