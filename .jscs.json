@@ -32,14 +32,13 @@
 
     "requireOperatorBeforeLineBreak": ["?", "-", "/", "*", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="],
 
-    "requireLeftStickedOperators": [","],
-    "disallowLeftStickedOperators": ["?"],
-    "disallowRightStickedOperators": ["?", ":"],
-
     "disallowSpaceAfterPrefixUnaryOperators": ["++", "--", "+", "-", "~", "!"],
     "disallowSpaceBeforePostfixUnaryOperators": ["++", "--"],
-    "requireSpaceBeforeBinaryOperators": ["/", "+", "-", "*", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="],
-    "requireSpaceAfterBinaryOperators": ["/", "+", "-", "*", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="],
+    "requireSpaceBeforeBinaryOperators":
+        ["/", "+", "-", "*", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<=", "?"],
+    "requireSpaceAfterBinaryOperators":
+        ["/", "+", "-", "*", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<=", "?", ":", ","],
+    "disallowSpaceBeforeBinaryOperators": [","],
 
     "disallowKeywords": ["with"],
 
