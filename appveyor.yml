@@ -12,8 +12,8 @@ environment:
 
 # Install scripts. (runs after repo cloning)
 install:
-  # Get the latest stable version of Node 0.STABLE.latest
-  - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
+  # Get the Node version with matching major & minor numbers
+  - ps: If (!$(node --version).StartsWith('v' + $env:nodejs_version)) {Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)}
   # Typical npm stuff.
   - npm install
 
