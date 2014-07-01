@@ -62,12 +62,6 @@
 
     "additionalRules": ["node_modules/jscs-trailing-comma/rules/*.js"],
 
-    "requireTrailingCommaInExpandedLiterals": {
-        "inArrays": true,
-        "inObjects": true
-    },
-    "disallowTrailingCommaInCollapsedLiterals": {
-        "inArrays": true,
-        "inObjects": true
-    }
+    "requireTrailingCommaInExpandedLiterals": true,
+    "disallowTrailingCommaInCollapsedLiterals": true
 }
