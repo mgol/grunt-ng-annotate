@@ -21,6 +21,9 @@
             "type": "MIT"
         }
     ],
+    "files": [
+        "tasks"
+    ],
     "dependencies": {
         "ng-annotate": "^0.9.0"
     },
