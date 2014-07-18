@@ -13,7 +13,6 @@
 
         // Best practices
         "block-scoped-var": 2,
-        "complexity": [2, 10],
         "eqeqeq": [2, "smart"],
         "no-else-return": 2,
         "no-floating-decimal": 2,
