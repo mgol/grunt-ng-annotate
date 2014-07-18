@@ -44,14 +44,6 @@ describe('grunt-ng-annotate API', function () {
         expect(readTmp('concatenated.js')).to.be(readFix('concatenated.js'));
     });
 
-    it('should save the transformed file into the source path with added suffix', function () {
-        expect(readTmp('not-annotated.js-suffix')).to.be(readFix('annotated.js'));
-    });
-
-    it('should save the transformed file into the source path transformed via `transformDest`', function () {
-        expect(readTmp('not-annotated.es5')).to.be(readFix('annotated.js'));
-    });
-
     it('should respect the `singleQuotes` setting', function () {
         expect(readTmp('not-annotated-singlequotes.js')).to.be(readFix('annotated-single.js'));
     });
@@ -63,5 +55,15 @@ describe('grunt-ng-annotate API', function () {
     it('should pass the correct options when using multiple input sources', function () {
         expect(readTmp('multiple-1.js')).to.be(readFix('not-annotated.js'));
         expect(readTmp('multiple-2.js')).to.be(readFix('not-annotated.js'));
+    });
+});
+
+describe('grunt-ng-annotate API: deprecated options', function () {
+    it('should save the transformed file into the source path with added suffix', function () {
+        expect(readTmp('not-annotated.js-suffix')).to.be(readFix('annotated.js'));
+    });
+
+    it('should save the transformed file into the source path transformed via `transformDest`', function () {
+        expect(readTmp('not-annotated.es5')).to.be(readFix('annotated.js'));
     });
 });

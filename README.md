@@ -56,16 +56,6 @@ The `ngAnnotate` task accepts a couple of options:
     // https://npmjs.org/package/ng-annotate
     regexp: regexp,
 
-    // If files are provided without a destination, each file is processed
-    // separately and each of them is saved under original name with appended
-    // suffix provided here.
-    outputFileSuffix: string,
-
-    // If files are provided without a destination and this option is set,
-    // each file is processed separately and each of them is saved under original
-    // name processed by this function.
-    transformDest: function (sourcePath) {},
-
     // Switches the quote type for strings in the annotations array to single
     // ones; e.g. '$scope' instead of "$scope" (false by default).
     singleQuotes: true|false,
@@ -89,12 +79,31 @@ grunt.initConfig({
         options: {
             singleQuotes: true,
         },
-        all: {
+        app1: {
             files: {
                 'a.js': ['a.js'],
                 'c.js': ['b.js'],
                 'f.js': ['d.js', 'e.js'],
             },
+        },
+        app2: {
+            files: [
+                {
+                    expand: true,
+                    src: ['f.js'],
+                    ext: '.annotated.js', // Dest filepaths will have this extension.
+                    extDot: 'last',       // Extensions in filenames begin after the last dot
+                },
+            ],
+        },
+        app3: {
+            files: [
+                {
+                    expand: true,
+                    src: ['g.js'],
+                    rename: function (dest, src) { return src + '-annotated'; },
+                },
+            ],
         },
     },
 });
@@ -105,6 +114,8 @@ grunt.loadNpmTasks('grunt-ng-annotate');
 After executing `grunt ngAnnotate`, you'll get file `a.js` annotated and saved under the same name, file `b.js`
 annotated and saved as `c.js` and files `d.js` and `e.js` concatenated, annotated and saved as `f.js`. Annotations
 will be saved using single quotes.
+
+An annotated version of the `f.js` file will be saved as `f.annotated.js` and an annotated version of the `g.js` file will be saved as `g.js-annotated`. 
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed
