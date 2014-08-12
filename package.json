@@ -8,7 +8,12 @@
     "email": "m.goleb@gmail.com"
   },
   "keywords": [
-    "gruntplugin"
+    "angular",
+    "angularjs",
+    "annotate",
+    "grunt",
+    "gruntplugin",
+    "minify"
   ],
   "main": "Gruntfile.js",
   "repository": {
