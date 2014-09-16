@@ -36,12 +36,13 @@
     "expect.js": "0.3.1",
     "grunt-cli": "0.1.13",
     "grunt-contrib-clean": "0.6.0",
-    "grunt-eslint": "0.6.0",
-    "grunt-jscs": "0.6.2",
-    "grunt-mocha-test": "0.11.0",
+    "grunt-eslint": "1.1.0",
+    "grunt-jscs": "0.7.1",
+    "grunt-mocha-test": "0.12.0",
     "jscs-trailing-comma": "0.3.0",
     "load-grunt-tasks": "0.6.0",
-    "time-grunt": "0.4.0"
+    "mocha": "1.21.4",
+    "time-grunt": "1.0.0"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"
