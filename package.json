@@ -30,7 +30,7 @@
     "tasks"
   ],
   "dependencies": {
-    "ng-annotate": "~0.10.0"
+    "ng-annotate": "~0.11.0"
   },
   "devDependencies": {
     "expect.js": "0.3.1",
