@@ -11,9 +11,16 @@
     "angular",
     "angularjs",
     "annotate",
+    "annotation",
+    "annotations",
+    "di",
+    "dependency",
+    "injection",
+    "minify",
     "grunt",
     "gruntplugin",
-    "minify"
+    "non-intrusive",
+    "transformation"
   ],
   "main": "Gruntfile.js",
   "repository": {
