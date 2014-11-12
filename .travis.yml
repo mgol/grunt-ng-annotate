@@ -2,3 +2,9 @@ language: node_js
 node_js:
   - '0.10'
   - '0.11'
+install:
+  # Disable the spinner, it looks bad on CI
+  - npm config set spin false
+  # Log HTTP requests
+  - npm config set loglevel http
+  - time npm install
