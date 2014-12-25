@@ -22,7 +22,6 @@
     "non-intrusive",
     "transformation"
   ],
-  "main": "Gruntfile.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/mzgol/grunt-ng-annotate.git"
