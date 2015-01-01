@@ -3,9 +3,8 @@ sudo: false
 node_js:
   - '0.10'
   - '0.11'
-install:
-  # Disable the spinner, it looks bad on CI
-  - npm config set spin false
+before_install:
   # Log HTTP requests
   - npm config set loglevel http
+install:
   - time npm install

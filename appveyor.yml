@@ -14,8 +14,6 @@ environment:
 install:
   # Get the Node version with matching major & minor numbers
   - ps: Install-Product node $env:nodejs_version
-  # Disable the spinner, it looks bad on CI
-  - npm config set spin false
   # Log HTTP requests
   - npm config set loglevel http
   # Typical npm stuff.
