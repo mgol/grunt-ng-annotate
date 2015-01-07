@@ -27,11 +27,7 @@
     "url": "https://github.com/mzgol/grunt-ng-annotate.git"
   },
   "bugs": "https://github.com/mzgol/grunt-ng-annotate/issues",
-  "licenses": [
-    {
-      "type": "MIT"
-    }
-  ],
+  "license": "MIT",
   "files": [
     "tasks"
   ],
