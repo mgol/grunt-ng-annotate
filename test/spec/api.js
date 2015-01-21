@@ -8,7 +8,13 @@ var fs = require('fs'),
     expect = require('expect.js');
 
 function readFile(path) {
-    return fs.readFileSync(path, {encoding: 'utf8'});
+    return normalizeNewLines(fs.readFileSync(path, {encoding: 'utf8'}));
+}
+
+function normalizeNewLines(input) {
+    return input
+        .replace(/\r\n/g, '\n')
+        .replace(/\r$/, '');
 }
 
 function readTmp(filename) {
@@ -90,7 +96,9 @@ describe('grunt-ng-annotate API', function () {
             expect(sourceMapPart).to.be('not-annotated-source-map-external.js.map');
 
             expect(map.sources).to.eql(['../fixtures/not-annotated.js']);
-            expect(map.sourcesContent).to.eql([readFix('not-annotated.js')]);
+
+            expect(map.sourcesContent.length).to.be(1);
+            expect(normalizeNewLines(map.sourcesContent[0])).to.be(readFix('not-annotated.js'));
         });
     });
 });

@@ -15,7 +15,9 @@ var ngAnnotate = require('ng-annotate');
 module.exports = function (grunt) {
 
     function getPathFromTo(fromFile, toFile) {
-        return path.relative(path.resolve(path.dirname(fromFile)), path.resolve(toFile));
+        return path.relative(path.resolve(path.dirname(fromFile)), path.resolve(toFile))
+            // URLs should have UNIX-y paths.
+            .replace(/\\/g, '/');
     }
 
     function handleOptions(options) {
