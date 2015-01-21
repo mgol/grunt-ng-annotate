@@ -128,27 +128,6 @@ module.exports = function (grunt) {
                     },
                 ],
             },
-
-            /* The following options are deprecated & will be removed in the future. */
-            outputFileSuffix: {
-                options: {
-                    add: true,
-                    remove: true,
-                    outputFileSuffix: '-suffix',
-                    transformDest: null,
-                },
-                src: ['test/tmp/not-annotated.js'],
-            },
-            transformDest: {
-                options: {
-                    add: true,
-                    remove: true,
-                    transformDest: function (srcPath) {
-                        return srcPath.replace(/\/fixtures\//, '/tmp/').replace(/\.js/, '.es5');
-                    },
-                },
-                src: ['test/fixtures/not-annotated.js'],
-            },
         },
 
         // Unit tests.

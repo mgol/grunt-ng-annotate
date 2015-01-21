@@ -57,13 +57,3 @@ describe('grunt-ng-annotate API', function () {
         expect(readTmp('multiple-2.js')).to.be(readFix('not-annotated.js'));
     });
 });
-
-describe('grunt-ng-annotate API: deprecated options', function () {
-    it('should save the transformed file into the source path with added suffix', function () {
-        expect(readTmp('not-annotated.js-suffix')).to.be(readFix('annotated.js'));
-    });
-
-    it('should save the transformed file into the source path transformed via `transformDest`', function () {
-        expect(readTmp('not-annotated.es5')).to.be(readFix('annotated.js'));
-    });
-});
