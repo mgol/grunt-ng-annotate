@@ -38,38 +38,53 @@ grunt.initConfig({
 })
 ```
 
-#### Options
+### Options
 
 The `ngAnnotate` task accepts a couple of options:
 
-```js
-{
-    // Tells if ngAnnotate should add annotations (true by default).
-    add: true|false,
+#### add
 
-    // Tells if ngAnnotate should remove annotations (false by default).
-    remove: true|false,
+Tells if ngAnnotate should add annotations.
 
-    // If provided, only strings matched by the regexp are interpreted as module
-    // names. You can provide both a regular expression and a string representing
-    // one. See README of ng-annotate for further details:
-    // https://npmjs.org/package/ng-annotate
-    regexp: regexp,
+Type: `boolean`
 
-    // Switches the quote type for strings in the annotations array to single
-    // ones; e.g. '$scope' instead of "$scope" (false by default).
-    singleQuotes: true|false,
+Default: `true`
 
-    // If ngAnnotate supports a new option that is not directly supported via
-    // this grunt task yet, you can pass it here. These options gets merged
-    // with the above specific to ngAnnotate. Options passed here have lower
-    // precedence to the direct ones described above.
-    ngAnnotateOptions: {},
-}
-```
+#### remove
+
+Tells if ngAnnotate should remove annotations.
+
+Type: `boolean`
+
+Default: `false`
 
 Note that both `add` and `remove` options can be set to true; in such a case `ngAnnotate` first removes
 annotations and then re-adds them (it can be used to check if annotations were provided correctly).
+
+#### regexp
+
+If provided, only strings matched by the regexp are interpreted as module names. You can provide both a regular expression and a string representing one. See README of ng-annotate for further details: https://npmjs.org/package/ng-annotate
+
+Type: `regexp`
+
+Default: none
+
+#### singleQuotes
+
+Switches the quote type for strings in the annotations array to single ones; e.g. `'$scope'` instead of `"$scope"`.
+
+Type: `boolean`
+
+Default: `false`
+
+#### ngAnnotateOptions
+
+If ngAnnotate supports a new option that is not directly supported via this Grunt task yet, you can pass it here. These options gets merged with the above specific to ngAnnotate. Options passed here have lower precedence to the direct ones described above.
+
+Type: `object`
+
+Default: `{}`
+
 
 ### Usage Examples
 
