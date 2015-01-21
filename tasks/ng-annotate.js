@@ -122,7 +122,7 @@ module.exports = function (grunt) {
                     tmpFilePath,
                     mapping.src.map(function (file) {
                         return grunt.file.read(file);
-                    }).join('\n')
+                    }).join(';\n')
                 );
 
                 if (!runNgAnnotate(tmpFilePath, tmpFilePath, options.ngAnnotateOptions)) {
