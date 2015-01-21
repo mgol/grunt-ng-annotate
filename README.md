@@ -20,10 +20,9 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-ng-annotate');
 ```
 
-## The "ngAnnotate" task
+## Overview
 
-### Overview
-In your project's Gruntfile, add a section named `ngAnnotate` to the data object passed into `grunt.initConfig()`.
+This project defines the `ngAnnotate` task. In your project's Gruntfile, add a section named `ngAnnotate` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
@@ -38,11 +37,11 @@ grunt.initConfig({
 })
 ```
 
-### Options
+## Options
 
 The `ngAnnotate` task accepts a couple of options:
 
-#### add
+### add
 
 Tells if ngAnnotate should add annotations.
 
@@ -50,7 +49,7 @@ Type: `boolean`
 
 Default: `true`
 
-#### remove
+### remove
 
 Tells if ngAnnotate should remove annotations.
 
@@ -61,7 +60,7 @@ Default: `false`
 Note that both `add` and `remove` options can be set to true; in such a case `ngAnnotate` first removes
 annotations and then re-adds them (it can be used to check if annotations were provided correctly).
 
-#### regexp
+### regexp
 
 If provided, only strings matched by the regexp are interpreted as module names. You can provide both a regular expression and a string representing one. See README of ng-annotate for further details: https://npmjs.org/package/ng-annotate
 
@@ -69,7 +68,7 @@ Type: `regexp`
 
 Default: none
 
-#### singleQuotes
+### singleQuotes
 
 Switches the quote type for strings in the annotations array to single ones; e.g. `'$scope'` instead of `"$scope"`.
 
@@ -77,7 +76,17 @@ Type: `boolean`
 
 Default: `false`
 
-#### ngAnnotateOptions
+### sourceMap
+
+Enables source map generation.
+
+Type: `boolean` or `string`
+
+Default: `false`
+
+If set to a string, the string points to a file where to save the source map. If set to `true`, an inline source map will be used.
+
+### ngAnnotateOptions
 
 If ngAnnotate supports a new option that is not directly supported via this Grunt task yet, you can pass it here. These options gets merged with the above specific to ngAnnotate. Options passed here have lower precedence to the direct ones described above.
 
@@ -86,7 +95,7 @@ Type: `object`
 Default: `{}`
 
 
-### Usage Examples
+## Usage Examples
 
 ```js
 grunt.initConfig({

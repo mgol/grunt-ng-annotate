@@ -56,4 +56,41 @@ describe('grunt-ng-annotate API', function () {
         expect(readTmp('multiple-1.js')).to.be(readFix('not-annotated.js'));
         expect(readTmp('multiple-2.js')).to.be(readFix('not-annotated.js'));
     });
+
+    describe('source maps', function () {
+        function getSourceMapPart(source) {
+            var sourceMapPart = source.match(/\/\/# sourceMappingURL=(\S+)/);
+            return sourceMapPart && sourceMapPart[1];
+        }
+
+        function getSourcePart(source) {
+            return source.replace(/\n\/\/# sourceMappingURL=\S+/, '');
+        }
+
+        it('should generate an inline source map by default', function () {
+            var generated = readTmp('not-annotated-source-map.js');
+            var sourceMapPart = getSourceMapPart(generated);
+            var sourcePart = getSourcePart(generated);
+
+            expect(sourcePart).to.be(readFix('annotated.js'));
+            expect(sourceMapPart.length).to.be.greaterThan(0);
+        });
+
+        it('should generate an external source map when asked', function () {
+            var map;
+            expect(function () {
+                map = JSON.parse(readTmp('not-annotated-source-map-external.js.map'));
+            }).to.not.throwException();
+
+            var generated = readTmp('not-annotated-source-map-external.js');
+            var sourceMapPart = getSourceMapPart(generated);
+            var sourcePart = getSourcePart(generated);
+
+            expect(sourcePart).to.be(readFix('annotated.js'));
+            expect(sourceMapPart).to.be('not-annotated-source-map-external.js.map');
+
+            expect(map.sources).to.eql(['../fixtures/not-annotated.js']);
+            expect(map.sourcesContent).to.eql([readFix('not-annotated.js')]);
+        });
+    });
 });

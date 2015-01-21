@@ -9,17 +9,20 @@
         // Possible errors
         "no-comma-dangle": 0,
         "no-console": 0,
-        "no-extra-parens": 2,
 
         // Best practices
         "block-scoped-var": 2,
+        "complexity": [2, 10],
         "eqeqeq": [2, "smart"],
         "no-else-return": 2,
         "no-floating-decimal": 2,
+        "no-redeclare": 0, // TODO remove the disabling once let/const scope is calculated correctly
+        "no-self-compare": 2,
         "wrap-iife": [2, "inside"],
 
         // Variables
         "no-use-before-define": 0,
+        "no-shadow": 0,
 
         // Node.js
         "no-mixed-requires": 0,
@@ -33,7 +36,6 @@
         "space-after-keywords": 2,
         "space-in-brackets": [2, "never"],
         "space-infix-ops": 2,
-        "one-var": 2,
         "quotes": [2, "single"],
 
         // Legacy

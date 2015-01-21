@@ -81,7 +81,7 @@ module.exports = function (grunt) {
             regexp: {
                 options: {
                     add: true,
-                    remove: true,
+                    remove: false,
                     regexp: /^matchedMod$/,
                 },
                 files: {
@@ -99,11 +99,31 @@ module.exports = function (grunt) {
             singleQuotes: {
                 options: {
                     add: true,
-                    remove: true,
+                    remove: false,
                     singleQuotes: true,
                 },
                 files: {
                     'test/tmp/not-annotated-singlequotes.js': ['test/fixtures/not-annotated.js'],
+                },
+            },
+            sourceMap: {
+                options: {
+                    add: true,
+                    remove: false,
+                    sourceMap: true,
+                },
+                files: {
+                    'test/tmp/not-annotated-source-map.js': ['test/fixtures/not-annotated.js'],
+                },
+            },
+            sourceMapNotInline: {
+                options: {
+                    add: true,
+                    remove: false,
+                    sourceMap: 'test/tmp/not-annotated-source-map-external.js.map',
+                },
+                files: {
+                    'test/tmp/not-annotated-source-map-external.js': ['test/fixtures/not-annotated.js'],
                 },
             },
             ngAnnotateOptions: {
