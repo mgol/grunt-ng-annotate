@@ -18,7 +18,11 @@ install:
   # Get the Node version with matching major & minor numbers
   - ps: Install-Product node $env:nodejs_version
   # io.js 1.0.3 has a broken npm version included
-  - if [ "`node --version`" == "v1.0.3" ]; then npm -g install npm; set PATH=%APPDATA%\npm;%PATH%; fi
+  - ps: |
+      If (!$(node --version).StartsWith('v1.0.3')) {
+        npm -g install npm
+        set PATH=%APPDATA%\npm;%PATH%
+      }
   # Log HTTP requests
   - npm config set loglevel http
   # Typical npm stuff.
