@@ -13,17 +13,15 @@ environment:
     # io.js
     - nodejs_version: "1.0"
 
-matrix:
-  allow_failures:
-    # io.js 1.0.3 has a broken npm version included
-    # and it's not possible to update it easily because of that
-    # TODO remove it when io.js 1.0.4 comes to AppVeyor
-    - nodejs_version: "1.0"
-
 # Install scripts. (runs after repo cloning)
 install:
   # Get the Node version with matching major & minor numbers
   - ps: Install-Product node $env:nodejs_version
+  # io.js 1.0.3 has a broken npm version included
+  - ps: |
+      If (!$(node --version).StartsWith('v1.0.3')) {
+        Update-NodeJsInstallation 1.0.4
+      }
   # Log HTTP requests
   - npm config set loglevel http
   # Typical npm stuff.
