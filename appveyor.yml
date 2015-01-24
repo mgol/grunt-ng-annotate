@@ -19,7 +19,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   # io.js 1.0.3 has a broken npm version included
   - ps: |
-      If (!$(node --version).StartsWith('v1.0.3')) {
+      If ($(node --version).StartsWith('v1.0.3')) {
         Update-NodeJsInstallation 1.0.4
       }
   # Log HTTP requests
