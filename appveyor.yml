@@ -21,7 +21,7 @@ install:
   - ps: |
       If (!$(node --version).StartsWith('v1.0.3')) {
         npm -g install npm
-        set PATH=%APPDATA%\npm;%PATH%
+        $env:path = $env:appdata + "\npm;" + $env:path
       }
   # Log HTTP requests
   - npm config set loglevel http
