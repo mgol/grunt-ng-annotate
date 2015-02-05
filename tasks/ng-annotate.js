@@ -9,7 +9,7 @@
 'use strict';
 
 var path = require('path');
-var _ = require('lodash');
+var cloneDeep = require('lodash.clonedeep');
 var ngAnnotate = require('ng-annotate');
 
 module.exports = function (grunt) {
@@ -141,7 +141,7 @@ module.exports = function (grunt) {
             function runNgAnnotate(mapping, options) {
                 filesNum++;
 
-                var ngAnnotateOptions = _.cloneDeep(options.ngAnnotateOptions);
+                var ngAnnotateOptions = cloneDeep(options.ngAnnotateOptions);
 
                 if (ngAnnotateOptions.sourcemap) {
                     if (mapping.src.length > 1) {

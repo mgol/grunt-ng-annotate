@@ -32,7 +32,7 @@
     "tasks"
   ],
   "dependencies": {
-    "lodash": "~3.1.0",
+    "lodash.clonedeep": "~3.0.0",
     "ng-annotate": "~0.15.4"
   },
   "devDependencies": {
