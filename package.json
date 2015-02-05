@@ -48,7 +48,7 @@
     "time-grunt": "1.0.0"
   },
   "peerDependencies": {
-    "grunt": "~0.4.1"
+    "grunt": "~0.4.5"
   },
   "scripts": {
     "test": "grunt"
