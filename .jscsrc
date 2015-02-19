@@ -60,7 +60,7 @@
         "test/fixtures/**"
     ],
 
-    "additionalRules": ["node_modules/jscs-trailing-comma/rules/*.js"],
+    "plugins": ["jscs-trailing-comma"],
 
     "requireTrailingCommaInExpandedLiterals": true,
     "disallowTrailingCommaInCollapsedLiterals": true
