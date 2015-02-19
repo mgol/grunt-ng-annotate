@@ -96,6 +96,17 @@ module.exports = function (grunt) {
                     ],
                 },
             },
+            srcDestSeparator: {
+                options: {
+                    separator: ';',
+                },
+                files: {
+                    'test/tmp/concatenated-separator.js': [
+                        'test/tmp/not-annotated.js',
+                        'test/tmp/annotated.js',
+                    ],
+                },
+            },
             singleQuotes: {
                 options: {
                     add: true,

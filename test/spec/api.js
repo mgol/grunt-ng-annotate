@@ -50,6 +50,10 @@ describe('grunt-ng-annotate API', function () {
         expect(readTmp('concatenated.js')).to.be(readFix('concatenated.js'));
     });
 
+    it('should concatenate source files with separator and save to destination path', function () {
+        expect(readTmp('concatenated-separator.js')).to.be(readFix('concatenated-separator.js'));
+    });
+
     it('should respect the `singleQuotes` setting', function () {
         expect(readTmp('not-annotated-singlequotes.js')).to.be(readFix('annotated-single.js'));
     });

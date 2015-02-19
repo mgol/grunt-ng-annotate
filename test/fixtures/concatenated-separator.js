@@ -31,8 +31,7 @@
         };
     }]);
 })();
-
-(function () {
+;(function () {
     "use strict";
 
     angular.module("app", ["dep1", "dep2"])

@@ -51,6 +51,11 @@ module.exports = function (grunt) {
             delete options.singleQuotes;
         }
 
+        if (options.separator != null) {
+            options.ngAnnotateOptions.separator = options.separator;
+            delete options.separator;
+        }
+
         if (options.sourceMap) {
             sourceMapOptions = options.ngAnnotateOptions.sourcemap = {};
             sourceMapOptions.inline = options.sourceMap === true;
@@ -151,9 +156,14 @@ module.exports = function (grunt) {
                     ngAnnotateOptions.sourcemap.inFile = getPathFromTo(mapping.dest, mapping.src[0]);
                 }
 
+                // seperator for file concatenation; defaults to linefeed
+                var separator = (typeof ngAnnotateOptions.separator === 'string') ?
+                        ngAnnotateOptions.separator :
+                        grunt.util.linefeed;
+
                 var concatenatedSource = mapping.src.map(function (file) {
                     return grunt.file.read(file);
-                }).join(';\n');
+                }).join(separator);
 
                 var ngAnnotateOutput = ngAnnotate(concatenatedSource, ngAnnotateOptions);
 
