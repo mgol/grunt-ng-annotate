@@ -67,6 +67,10 @@ describe('grunt-ng-annotate API', function () {
         expect(readTmp('multiple-2.js')).to.be(readFix('not-annotated.js'));
     });
 
+    it('should successfully overwrite files if requested', function () {
+        expect(readTmp('overwritten.js')).to.be(readFix('annotated.js'));
+    });
+
     describe('source maps', function () {
         function getSourceMapPart(source) {
             var sourceMapPart = source.match(/\/\/# sourceMappingURL=(\S+)/);

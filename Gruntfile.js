@@ -18,6 +18,14 @@ module.exports = function (grunt) {
             },
         },
 
+        copy: {
+            test: {
+                files: {
+                    'test/tmp/overwritten.js': 'test/fixtures/not-annotated.js',
+                },
+            },
+        },
+
         eslint: {
             all: {
                 src: [
@@ -159,6 +167,17 @@ module.exports = function (grunt) {
                     },
                 ],
             },
+            overwrittenSource: {
+                options: {
+                    add: true,
+                    remove: false,
+                },
+                files: [
+                    {
+                        'test/tmp/overwritten.js': 'test/tmp/overwritten.js',
+                    },
+                ],
+            },
         },
 
         // Unit tests.
@@ -187,6 +206,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'clean',
         'lint',
+        'copy',
         'ngAnnotate',
         'mochaTest',
     ]);
