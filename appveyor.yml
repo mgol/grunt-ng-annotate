@@ -1,5 +1,7 @@
 # http://www.appveyor.com/docs/appveyor-yml
 
+clone_depth: 10
+
 # Fix line endings in Windows. (runs before repo cloning)
 init:
   - git config --global core.autocrlf input
@@ -16,7 +18,7 @@ environment:
 install:
   # Get the Node version with matching major & minor numbers
   - ps: Install-Product node $env:nodejs_version
-  # Log HTTP requests
+  # Log HTTP requests.
   - npm config set loglevel http
   # Typical npm stuff.
   - npm install
@@ -30,6 +32,19 @@ test_script:
 
 # Don't actually build.
 build: off
+
+# Finish immediately if one of the jobs fails.
+matrix:
+  fast_finish: true
+
+# Set up cache, clear it on package.json changes.
+cache:
+  # Global npm packages.
+  - C:\Users\appveyor\AppData\Roaming\npm\node_modules -> package.json
+  # npm cache.
+  - C:\Users\appveyor\AppData\Roaming\npm-cache -> package.json
+  # Local npm modules.
+  - node_modules -> package.json
 
 # Set build version format here instead of in the admin panel.
 version: "{build}"
