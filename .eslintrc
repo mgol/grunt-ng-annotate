@@ -7,7 +7,7 @@
         // Rules are divided into sections from http://eslint.org/docs/rules/
 
         // Possible errors
-        "no-comma-dangle": 0,
+        "comma-dangle": 0,
         "no-console": 0,
 
         // Best practices
@@ -16,7 +16,7 @@
         "eqeqeq": [2, "smart"],
         "no-else-return": 2,
         "no-floating-decimal": 2,
-        "no-redeclare": 0, // TODO remove the disabling once let/const scope is calculated correctly
+        "no-lone-blocks": 0,
         "no-self-compare": 2,
         "wrap-iife": [2, "inside"],
 
@@ -24,7 +24,7 @@
         "no-use-before-define": 0,
         "no-shadow": 0,
 
-        // Node.js
+        // Node.js/io.js
         "no-mixed-requires": 0,
 
         // Stylistic issues
@@ -39,7 +39,6 @@
         "quotes": [2, "single"],
 
         // Legacy
-        "no-bitwise": 2,
-        "max-len": [2, 120, 4]
+        "no-bitwise": 2
     }
 }
