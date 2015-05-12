@@ -8,6 +8,8 @@
 
 'use strict';
 
+var path = require('path');
+
 module.exports = function (grunt) {
     require('time-grunt')(grunt);
 
@@ -15,6 +17,20 @@ module.exports = function (grunt) {
         clean: {
             test: {
                 src: ['test/tmp'],
+            },
+        },
+
+        babel: {
+            all: {
+                options: {
+                    sourceMap: 'inline',
+                    // Babel computes paths relative to the main directory and yet it doesn't
+                    // set sourceRoot be default
+                    sourceRoot: path.join(__dirname),
+                },
+                files: {
+                    'test/tmp/not-annotated-es6.js': 'test/fixtures/not-annotated-es6.js',
+                },
             },
         },
 
@@ -145,6 +161,16 @@ module.exports = function (grunt) {
                     'test/tmp/not-annotated-source-map-external.js': ['test/fixtures/not-annotated.js'],
                 },
             },
+            sourceMapCombined: {
+                options: {
+                    add: true,
+                    remove: false,
+                    sourceMap: true,
+                },
+                files: {
+                    'test/tmp/not-annotated-es6-source-map.js': ['test/tmp/not-annotated-es6.js'],
+                },
+            },
             ngAnnotateOptions: {
                 options: {
                     singleQuotes: true,
@@ -207,6 +233,7 @@ module.exports = function (grunt) {
         'clean',
         'lint',
         'copy',
+        'babel',
         'ngAnnotate',
         'mochaTest',
     ]);

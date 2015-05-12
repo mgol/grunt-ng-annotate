@@ -4,8 +4,13 @@
 
 'use strict';
 
-var fs = require('fs'),
-    expect = require('expect.js');
+var fs = require('fs');
+var path = require('path');
+var expect = require('expect.js');
+var sourceMap = require('source-map');
+var convertSourceMap = require('convert-source-map');
+
+var SourceMapConsumer = sourceMap.SourceMapConsumer;
 
 function readFile(path) {
     return normalizeNewLines(fs.readFileSync(path, {encoding: 'utf8'}));
@@ -72,41 +77,62 @@ describe('grunt-ng-annotate API', function () {
     });
 
     describe('source maps', function () {
-        function getSourceMapPart(source) {
-            var sourceMapPart = source.match(/\/\/# sourceMappingURL=(\S+)/);
-            return sourceMapPart && sourceMapPart[1];
-        }
-
         function getSourcePart(source) {
             return source.replace(/\n\/\/# sourceMappingURL=\S+/, '');
         }
 
         it('should generate an inline source map by default', function () {
             var generated = readTmp('not-annotated-source-map.js');
-            var sourceMapPart = getSourceMapPart(generated);
-            var sourcePart = getSourcePart(generated);
+            var existingMap = convertSourceMap.fromSource(generated).toObject();
+            var smc = new SourceMapConsumer(existingMap);
 
-            expect(sourcePart).to.be(readFix('annotated.js'));
-            expect(sourceMapPart.length).to.be.greaterThan(0);
+            expect(smc.sources).to.eql(['../fixtures/not-annotated.js']);
+            expect(smc.sourcesContent).to.eql([readFix('../fixtures/not-annotated.js')]);
+
+            expect(getSourcePart(generated).trim()).to.be(readFix('annotated.js').trim());
+
+            expect(
+                smc.originalPositionFor({
+                    line: 5,
+                    column: 63,
+                })).to.eql({
+                    line: 5,
+                    column: 35,
+                    source: smc.sources[0],
+                    name: null,
+                });
         });
 
         it('should generate an external source map when asked', function () {
-            var map;
-            expect(function () {
-                map = JSON.parse(readTmp('not-annotated-source-map-external.js.map'));
-            }).to.not.throwException();
-
             var generated = readTmp('not-annotated-source-map-external.js');
-            var sourceMapPart = getSourceMapPart(generated);
-            var sourcePart = getSourcePart(generated);
+            var smc = new SourceMapConsumer(readTmp('not-annotated-source-map-external.js.map'));
 
-            expect(sourcePart).to.be(readFix('annotated.js'));
-            expect(sourceMapPart).to.be('not-annotated-source-map-external.js.map');
+            expect(getSourcePart(generated).trim()).to.be(readFix('annotated.js').trim());
 
-            expect(map.sources).to.eql(['../fixtures/not-annotated.js']);
+            expect(smc.sources).to.eql(['../fixtures/not-annotated.js']);
+            expect(smc.sourcesContent).to.eql([readFix('not-annotated.js')]);
+        });
 
-            expect(map.sourcesContent.length).to.be(1);
-            expect(normalizeNewLines(map.sourcesContent[0])).to.be(readFix('not-annotated.js'));
+        it('should combine source maps', function () {
+            var generated = readTmp('not-annotated-es6-source-map.js');
+
+            expect(getSourcePart(generated).trim()).to.be(readFix('annotated-es6.js').trim());
+
+            var existingMap = convertSourceMap.fromSource(generated).toObject();
+            var smc = new SourceMapConsumer(existingMap);
+
+            expect(smc.sources).to.eql([path.join(__dirname, '../../', 'test/fixtures/not-annotated-es6.js')]);
+
+            expect(
+                smc.originalPositionFor({
+                    line: 9,
+                    column: 19,
+                })).to.eql({
+                    line: 8,
+                    column: 22,
+                    source: smc.sources[0],
+                    name: null,
+                });
         });
     });
 });

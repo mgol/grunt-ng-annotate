@@ -57,7 +57,7 @@ module.exports = function (grunt) {
         }
 
         if (options.sourceMap) {
-            sourceMapOptions = options.ngAnnotateOptions.sourcemap = {};
+            sourceMapOptions = options.ngAnnotateOptions.map = {};
             sourceMapOptions.inline = options.sourceMap === true;
         }
 
@@ -148,12 +148,12 @@ module.exports = function (grunt) {
 
                 var ngAnnotateOptions = cloneDeep(options.ngAnnotateOptions);
 
-                if (ngAnnotateOptions.sourcemap) {
+                if (ngAnnotateOptions.map) {
                     if (mapping.src.length > 1) {
                         grunt.fail.fatal('The ngAnnotate task doesn\'t support source maps with many-to-one mappings.');
                     }
 
-                    ngAnnotateOptions.sourcemap.inFile = getPathFromTo(mapping.dest, mapping.src[0]);
+                    ngAnnotateOptions.map.inFile = getPathFromTo(mapping.dest, mapping.src[0]);
                 }
 
                 // seperator for file concatenation; defaults to linefeed
@@ -179,7 +179,7 @@ module.exports = function (grunt) {
 
                 // Write ngAnnotate output (and a source map if requested) to the target file.
 
-                if (ngAnnotateOptions.sourcemap && !ngAnnotateOptions.sourcemap.inline) {
+                if (ngAnnotateOptions.map && !ngAnnotateOptions.map.inline) {
                     ngAnnotateOutput.src +=
                         '\n//# sourceMappingURL=' + getPathFromTo(mapping.dest, options.sourceMap);
                     grunt.file.write(options.sourceMap, ngAnnotateOutput.map);
