@@ -121,7 +121,9 @@ describe('grunt-ng-annotate API', function () {
             var existingMap = convertSourceMap.fromSource(generated).toObject();
             var smc = new SourceMapConsumer(existingMap);
 
-            expect(smc.sources).to.eql([path.join(__dirname, '../../', 'test/fixtures/not-annotated-es6.js')]);
+            expect(smc.sources).to.eql([
+                path.join(__dirname, '../../', 'test/fixtures/not-annotated-es6.js').replace(/\\+/g, '/'),
+            ]);
 
             expect(
                 smc.originalPositionFor({
