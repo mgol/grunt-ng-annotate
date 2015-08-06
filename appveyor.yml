@@ -9,9 +9,6 @@ init:
 # Test against these versions of Node.js.
 environment:
   matrix:
-    # Node.js
-    - nodejs_version: "0.12"
-    # io.js
     - nodejs_version: "2"
 
 # Install scripts. (runs after repo cloning)
