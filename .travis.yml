@@ -3,7 +3,7 @@ sudo: false
 node_js:
   - '0.10'
   - '0.12'
-  - 'node'
+  - '4'
 before_install:
   # Log HTTP requests
   - npm config set loglevel http
