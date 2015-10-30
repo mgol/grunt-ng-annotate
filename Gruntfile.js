@@ -52,19 +52,6 @@ module.exports = function (grunt) {
             },
         },
 
-        jscs: {
-            all: {
-                src: [
-                    'Gruntfile.js',
-                    'tasks/**/*.js',
-                    'test/**/*.js',
-                ],
-                options: {
-                    config: '.jscsrc',
-                },
-            },
-        },
-
         // Configuration to be run (and then tested).
         ngAnnotate: {
             options: {
@@ -225,7 +212,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('lint', [
         'eslint',
-        'jscs',
     ]);
 
     // By default, lint and run tests.

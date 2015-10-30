@@ -27,18 +27,18 @@ module.exports = function (grunt) {
             options.ngAnnotateOptions = {};
         }
 
-        if (options.add != null) {
+        if (options.add == null) {
+            options.ngAnnotateOptions.add = true;
+        } else {
             options.ngAnnotateOptions.add = options.add;
             delete options.add;
-        } else {
-            options.ngAnnotateOptions.add = true;
         }
 
-        if (options.remove != null) {
+        if (options.remove == null) {
+            options.ngAnnotateOptions.remove = false;
+        } else {
             options.ngAnnotateOptions.remove = options.remove;
             delete options.remove;
-        } else {
-            options.ngAnnotateOptions.remove = false;
         }
 
         if (options.regexp != null) {
@@ -128,10 +128,10 @@ module.exports = function (grunt) {
         'Add, remove and rebuild AngularJS dependency injection annotations',
 
         function () {
-            var filesNum = 0,
-                validRun = true,
+            var filesNum = 0;
+            var validRun = true;
             // Merge task-specific and/or target-specific options with these defaults.
-                options = this.options();
+            var options = this.options();
 
 
             handleOptions(options);
