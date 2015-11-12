@@ -4,6 +4,15 @@ node_js:
   - '0.12'
   - '4'
   - '5'
+env:
+  global:
+    - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 before_install:
   # Log HTTP requests
   - npm config set loglevel http
