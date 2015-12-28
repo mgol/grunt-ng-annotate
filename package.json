@@ -2,7 +2,7 @@
   "name": "grunt-ng-annotate",
   "version": "2.0.0-pre",
   "description": "Add, remove and rebuild AngularJS dependency injection annotations.",
-  "homepage": "https://github.com/mzgol/grunt-ng-annotate",
+  "homepage": "https://github.com/mgol/grunt-ng-annotate",
   "author": {
     "name": "Michał Gołębiowski",
     "email": "m.goleb@gmail.com"
@@ -24,9 +24,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mzgol/grunt-ng-annotate.git"
+    "url": "https://github.com/mgol/grunt-ng-annotate.git"
   },
-  "bugs": "https://github.com/mzgol/grunt-ng-annotate/issues",
+  "bugs": "https://github.com/mgol/grunt-ng-annotate/issues",
   "license": "MIT",
   "files": [
     "tasks"
