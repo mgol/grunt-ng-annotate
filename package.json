@@ -33,23 +33,23 @@
   ],
   "dependencies": {
     "lodash.clonedeep": "^3.0.2",
-    "ng-annotate": "^1.0.2"
+    "ng-annotate": "^1.2.0"
   },
   "devDependencies": {
-    "convert-source-map": "1.1.1",
-    "eslint-config-mzgol": "0.0.6",
+    "convert-source-map": "1.1.2",
+    "eslint-config-mgol": "0.0.10",
     "expect.js": "0.3.1",
     "grunt": "0.4.5",
     "grunt-babel": "5.0.0",
     "grunt-cli": "0.1.13",
-    "grunt-contrib-clean": "0.6.0",
+    "grunt-contrib-clean": "0.7.0",
     "grunt-contrib-copy": "0.8.2",
     "grunt-eslint": "17.3.1",
     "grunt-mocha-test": "0.12.7",
-    "load-grunt-tasks": "3.3.0",
-    "mocha": "2.3.3",
+    "load-grunt-tasks": "3.4.0",
+    "mocha": "2.3.4",
     "source-map": "0.5.3",
-    "time-grunt": "1.2.2"
+    "time-grunt": "1.3.0"
   },
   "peerDependencies": {
     "grunt": "~0.4.5"
