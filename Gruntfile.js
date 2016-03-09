@@ -8,8 +8,6 @@
 
 'use strict';
 
-var path = require('path');
-
 module.exports = function (grunt) {
     require('time-grunt')(grunt);
 
@@ -24,9 +22,6 @@ module.exports = function (grunt) {
             all: {
                 options: {
                     sourceMap: 'inline',
-                    // Babel computes paths relative to the main directory and yet it doesn't
-                    // set sourceRoot be default
-                    sourceRoot: path.join(__dirname),
                 },
                 files: {
                     'test/tmp/not-annotated-es6.js': 'test/fixtures/not-annotated-es6.js',

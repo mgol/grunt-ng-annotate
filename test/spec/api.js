@@ -5,7 +5,6 @@
 'use strict';
 
 var fs = require('fs');
-var path = require('path');
 var expect = require('expect.js');
 var sourceMap = require('source-map');
 var convertSourceMap = require('convert-source-map');
@@ -122,7 +121,8 @@ describe('grunt-ng-annotate API', function () {
             var smc = new SourceMapConsumer(existingMap);
 
             expect(smc.sources).to.eql([
-                path.join(__dirname, '../../', 'test/fixtures/not-annotated-es6.js').replace(/\\+/g, '/'),
+                'not-annotated-es6.js',
+                '../fixtures/not-annotated-es6.js',
             ]);
 
             expect(
@@ -132,7 +132,7 @@ describe('grunt-ng-annotate API', function () {
                 })).to.eql({
                     line: 8,
                     column: 22,
-                    source: smc.sources[0],
+                    source: smc.sources[smc.sources.length - 1],
                     name: null,
                 });
         });
