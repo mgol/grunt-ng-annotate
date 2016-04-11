@@ -194,7 +194,7 @@ module.exports = function (grunt) {
                 if (filesNum < 1) {
                     grunt.log.ok('No files provided to the ngAnnotate task.');
                 } else {
-                    grunt.log.ok(filesNum + (filesNum === 1 ? ' file' : ' files') + ' successfully generated.');
+                    grunt.log.ok(filesNum + (filesNum === 1 ? ' file' : ' files') + ' successfully annotated.');
                 }
             }
             return validRun;
