@@ -10,18 +10,11 @@
     "rules": {
         // Rules are divided into sections from http://eslint.org/docs/rules/
 
-        // TODO remove all these
-        "max-len": [1, 100, 4],
-        "func-style": 0,
+        // Stylistic issues
+        "id-blacklist": [2, "event"], // TODO remove this line when Node 6 comes out
 
         // ECMAScript 6
-        // TODO port to ES6 and enable most of it
-        "no-var": 0,
-        "object-shorthand": 0,
-        "prefer-arrow-callback": 0,
-        "prefer-const": 0,
-        "prefer-spread": 0,
-        "prefer-reflect": 0, // TODO enable when Node supports it
-        "prefer-template": 0
+        "prefer-reflect": 0, // TODO remove this line when Node 6 comes out
+        "prefer-rest-params": 0 // TODO remove this line when Node 6 comes out
     }
 }
