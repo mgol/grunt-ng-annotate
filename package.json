@@ -1,6 +1,6 @@
 {
   "name": "grunt-ng-annotate",
-  "version": "2.0.3-pre",
+  "version": "3.0.0",
   "description": "Add, remove and rebuild AngularJS dependency injection annotations.",
   "homepage": "https://github.com/mgol/grunt-ng-annotate",
   "author": {
