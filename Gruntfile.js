@@ -8,7 +8,7 @@
 
 'use strict';
 
-const spawn = require('cross-spawn-async');
+const spawn = require('cross-spawn');
 
 module.exports = function (grunt) {
     require('time-grunt')(grunt);
