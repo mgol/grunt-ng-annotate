@@ -17,8 +17,8 @@ var assert = require('assert');
 module.exports = function (grunt) {
     try {
         assert.strictEqual(eval('(r => [...r])([2])[0]'), 2);
-        return require('../src/ng-annotate')(grunt);
     } catch (e) {
         return require('../dist/src/ng-annotate')(grunt);
     }
+    return require('../src/ng-annotate')(grunt);
 };
