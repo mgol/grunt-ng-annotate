@@ -11,10 +11,10 @@
         // Rules are divided into sections from http://eslint.org/docs/rules/
 
         // Stylistic issues
-        "id-blacklist": [2, "event"], // TODO remove this line when Node 6 comes out
+        "id-blacklist": [2, "event"], // TODO remove this line when support for Node 4 is dropped
 
         // ECMAScript 6
-        "prefer-reflect": 0, // TODO remove this line when Node 6 comes out
-        "prefer-rest-params": 0 // TODO remove this line when Node 6 comes out
+        "prefer-reflect": 0, // TODO remove this line when support for Node 4 is dropped
+        "prefer-rest-params": 0 // TODO remove this line when support for Node 4 is dropped
     }
 }

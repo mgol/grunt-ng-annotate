@@ -30,8 +30,7 @@
   "license": "MIT",
   "files": [
     "tasks",
-    "src",
-    "dist/src"
+    "src"
   ],
   "dependencies": {
     "lodash.clonedeep": "^4.5.0",

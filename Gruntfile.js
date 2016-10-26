@@ -8,26 +8,7 @@
 
 'use strict';
 
-// Disable options that don't work in Node.js 0.12.
-// Gruntfile.js & tasks/*.js are the only non-transpiled files.
-/* eslint-disable no-var, object-shorthand, prefer-arrow-callback, prefer-const,
- prefer-spread, prefer-reflect, prefer-template */
-
-var fs = require('fs');
-var assert = require('assert');
-var spawn = require('cross-spawn-async');
-
-var newNode;
-try {
-    assert.strictEqual(eval('(r => [...r])([2])[0]'), 2); // eslint-disable-line no-eval
-    newNode = true;
-} catch (e) {
-    newNode = false;
-}
-
-var transformRelativePath = function transformRelativePath(filepath) {
-    return newNode ? filepath : 'dist/' + filepath;
-};
+const spawn = require('cross-spawn-async');
 
 module.exports = function (grunt) {
     require('time-grunt')(grunt);
@@ -36,7 +17,6 @@ module.exports = function (grunt) {
         clean: {
             test: {
                 src: [
-                    'dist',
                     'test/tmp',
                 ],
             },
@@ -48,47 +28,18 @@ module.exports = function (grunt) {
                     sourceMap: 'inline',
                 },
                 files: [{
-                    dest: transformRelativePath('test/tmp/not-annotated-es6.js'),
-                    src: transformRelativePath('test/fixtures/not-annotated-es6.js'),
+                    dest: 'test/tmp/not-annotated-es6.js',
+                    src: 'test/fixtures/not-annotated-es6.js',
                 }],
-            },
-            source: {
-                options: {
-                    sourceMap: true,
-                    retainLines: true,
-                },
-                files: [
-                    {
-                        expand: true,
-                        src: [
-                            'src/**/*.js',
-                            'test/**/*.js',
-                            '!test/fixtures/**/*.js',
-                        ],
-                        dest: 'dist',
-                    },
-                ],
             },
         },
 
         copy: {
             testPreparation: {
                 files: [{
-                    dest: transformRelativePath('test/tmp/overwritten.js'),
-                    src: transformRelativePath('test/fixtures/not-annotated.js'),
+                    dest: 'test/tmp/overwritten.js',
+                    src: 'test/fixtures/not-annotated.js',
                 }],
-            },
-            nonGenerated: {
-                files: [
-                    {
-                        expand: true,
-                        dot: true,
-                        src: [
-                            'test/fixtures/**/*.js',
-                        ],
-                        dest: 'dist',
-                    },
-                ],
             },
         },
 
@@ -110,8 +61,8 @@ module.exports = function (grunt) {
             },
             default: {
                 files: [{
-                    dest: transformRelativePath('test/tmp/partially-annotated-messy-default.js'),
-                    src: transformRelativePath('test/fixtures/partially-annotated-messy.js'),
+                    dest: 'test/tmp/partially-annotated-messy-default.js',
+                    src: 'test/fixtures/partially-annotated-messy.js',
                 }],
             },
             add: {
@@ -120,8 +71,8 @@ module.exports = function (grunt) {
                     remove: false,
                 },
                 files: [{
-                    dest: transformRelativePath('test/tmp/not-annotated.js'),
-                    src: transformRelativePath('test/fixtures/not-annotated.js'),
+                    dest: 'test/tmp/not-annotated.js',
+                    src: 'test/fixtures/not-annotated.js',
                 }],
             },
             remove: {
@@ -130,8 +81,8 @@ module.exports = function (grunt) {
                     remove: true,
                 },
                 files: [{
-                    dest: transformRelativePath('test/tmp/annotated.js'),
-                    src: transformRelativePath('test/fixtures/annotated.js'),
+                    dest: 'test/tmp/annotated.js',
+                    src: 'test/fixtures/annotated.js',
                 }],
             },
             addRemove: {
@@ -140,8 +91,8 @@ module.exports = function (grunt) {
                     remove: true,
                 },
                 files: [{
-                    dest: transformRelativePath('test/tmp/partially-annotated-messy-addremove.js'),
-                    src: transformRelativePath('test/fixtures/partially-annotated-messy.js'),
+                    dest: 'test/tmp/partially-annotated-messy-addremove.js',
+                    src: 'test/fixtures/partially-annotated-messy.js',
                 }],
             },
             regexp: {
@@ -151,16 +102,16 @@ module.exports = function (grunt) {
                     regexp: /^matchedMod$/,
                 },
                 files: [{
-                    dest: transformRelativePath('test/tmp/not-annotated-regexp.js'),
-                    src: transformRelativePath('test/fixtures/not-annotated.js'),
+                    dest: 'test/tmp/not-annotated-regexp.js',
+                    src: 'test/fixtures/not-annotated.js',
                 }],
             },
             srcDest: {
                 files: [{
-                    dest: transformRelativePath('test/tmp/concatenated.js'),
+                    dest: 'test/tmp/concatenated.js',
                     src: [
-                        transformRelativePath('test/tmp/not-annotated.js'),
-                        transformRelativePath('test/tmp/annotated.js'),
+                        'test/tmp/not-annotated.js',
+                        'test/tmp/annotated.js',
                     ],
                 }],
             },
@@ -169,10 +120,10 @@ module.exports = function (grunt) {
                     separator: ';',
                 },
                 files: [{
-                    dest: transformRelativePath('test/tmp/concatenated-separator.js'),
+                    dest: 'test/tmp/concatenated-separator.js',
                     src: [
-                        transformRelativePath('test/tmp/not-annotated.js'),
-                        transformRelativePath('test/tmp/annotated.js'),
+                        'test/tmp/not-annotated.js',
+                        'test/tmp/annotated.js',
                     ],
                 }],
             },
@@ -183,8 +134,8 @@ module.exports = function (grunt) {
                     singleQuotes: true,
                 },
                 files: [{
-                    dest: transformRelativePath('test/tmp/not-annotated-singlequotes.js'),
-                    src: transformRelativePath('test/fixtures/not-annotated.js'),
+                    dest: 'test/tmp/not-annotated-singlequotes.js',
+                    src: 'test/fixtures/not-annotated.js',
                 }],
             },
             sourceMap: {
@@ -194,20 +145,19 @@ module.exports = function (grunt) {
                     sourceMap: true,
                 },
                 files: [{
-                    dest: transformRelativePath('test/tmp/not-annotated-source-map.js'),
-                    src: transformRelativePath('test/fixtures/not-annotated.js'),
+                    dest: 'test/tmp/not-annotated-source-map.js',
+                    src: 'test/fixtures/not-annotated.js',
                 }],
             },
             sourceMapNotInline: {
                 options: {
                     add: true,
                     remove: false,
-                    sourceMap: transformRelativePath(
-                        'test/tmp/not-annotated-source-map-external.js.map'),
+                    sourceMap: 'test/tmp/not-annotated-source-map-external.js.map',
                 },
                 files: [{
-                    dest: transformRelativePath('test/tmp/not-annotated-source-map-external.js'),
-                    src: transformRelativePath('test/fixtures/not-annotated.js'),
+                    dest: 'test/tmp/not-annotated-source-map-external.js',
+                    src: 'test/fixtures/not-annotated.js',
                 }],
             },
             sourceMapCombined: {
@@ -217,8 +167,8 @@ module.exports = function (grunt) {
                     sourceMap: true,
                 },
                 files: [{
-                    dest: transformRelativePath('test/tmp/not-annotated-es6-source-map.js'),
-                    src: transformRelativePath('test/tmp/not-annotated-es6.js'),
+                    dest: 'test/tmp/not-annotated-es6-source-map.js',
+                    src: 'test/tmp/not-annotated-es6.js',
                 }],
             },
             ngAnnotateOptions: {
@@ -226,8 +176,8 @@ module.exports = function (grunt) {
                     singleQuotes: true,
                 },
                 files: [{
-                    dest: transformRelativePath('test/tmp/not-annotated-ngannotateoptions.js'),
-                    src: transformRelativePath('test/fixtures/not-annotated.js'),
+                    dest: 'test/tmp/not-annotated-ngannotateoptions.js',
+                    src: 'test/fixtures/not-annotated.js',
                 }],
             },
             multipleFileSources: {
@@ -238,9 +188,9 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: transformRelativePath('test/fixtures'),
+                        cwd: 'test/fixtures',
                         src: ['multiple-1.js', 'multiple-2.js'],
-                        dest: transformRelativePath('test/tmp'),
+                        dest: 'test/tmp',
                     },
                 ],
             },
@@ -251,8 +201,8 @@ module.exports = function (grunt) {
                 },
                 files: [
                     {
-                        dest: transformRelativePath('test/tmp/overwritten.js'),
-                        src: transformRelativePath('test/tmp/overwritten.js'),
+                        dest: 'test/tmp/overwritten.js',
+                        src: 'test/tmp/overwritten.js',
                     },
                 ],
             },
@@ -264,7 +214,7 @@ module.exports = function (grunt) {
                 options: {
                     reporter: 'spec',
                 },
-                src: transformRelativePath('test/spec/*.js'),
+                src: 'test/spec/*.js',
             },
         },
     });
@@ -272,24 +222,13 @@ module.exports = function (grunt) {
     // Load all grunt tasks matching the `grunt-*` pattern.
     require('load-grunt-tasks')(grunt);
 
-    // Actually load this plugin's task(s). Do it only if dist is present to prevent errors
-    // in older Nodes. Mocha will re-run Grunt a couple of times when those files will already
-    // be present.
-    if (fs.existsSync(__dirname + '/dist')) {
-        grunt.loadTasks('tasks');
-    }
+    // Load this plugin's task(s).
+    grunt.loadTasks('tasks');
 
     grunt.registerTask('lint', [
         'eslint',
     ]);
 
-
-    // In modern Node.js we just use the non-transpiled source as it makes it easier to debug;
-    // in older version we transpile (but keep the lines).
-    grunt.registerTask('build', [
-        'copy:nonGenerated',
-        'babel:source',
-    ]);
 
     grunt.registerTask('testPreparation', [
         'copy:testPreparation',
@@ -299,17 +238,17 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['mochaTest']);
 
     grunt.registerTask('ngAnnotateAndTestSpawned', function () {
-        var done = this.async();
+        const done = this.async();
 
         spawn('grunt', ['ngAnnotate', 'test'], {
             cwd: __dirname,
             stdio: 'inherit',
-        }).on('close', function (code) {
+        }).on('close', code => {
             if (code === 0) {
                 done();
                 return;
             }
-            grunt.log.error('`grunt ngAnnotate` failed with code ' + code);
+            grunt.log.error(`'\`grunt ngAnnotate\` failed with code ${ code }`);
             done(false);
         });
     });
@@ -318,7 +257,6 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'clean',
         'lint',
-        'build',
         'testPreparation',
         'ngAnnotateAndTestSpawned',
     ]);
