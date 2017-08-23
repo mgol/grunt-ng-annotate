@@ -4,7 +4,7 @@
   "description": "Add, remove and rebuild AngularJS dependency injection annotations.",
   "homepage": "https://github.com/mgol/grunt-ng-annotate",
   "author": {
-    "name": "Michał Gołębiowski",
+    "name": "Michał Gołębiowski-Owczarek",
     "email": "m.goleb@gmail.com"
   },
   "keywords": [
