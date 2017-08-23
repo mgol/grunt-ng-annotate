@@ -150,7 +150,7 @@ After executing `grunt ngAnnotate`, you'll get file `a.js` annotated and saved u
 An annotated version of the `f.js` file will be saved as `f.annotated.js` and an annotated version of the `g.js` file will be saved as `g.js-annotated`. 
 
 ## Supported Node.js versions
-This project aims to support all Node.js LTS versions in the "active" phase (see [LTS README](https://github.com/nodejs/LTS/blob/master/README.md) for more details) as well as the latest stable Node.js.
+This project aims to support all supported Node.js LTS versions (see [LTS README](https://github.com/nodejs/LTS/blob/master/README.md) for more details) as well as the latest stable Node.js.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
