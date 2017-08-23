@@ -4,7 +4,7 @@ sudo: false
 node_js:
   - '4'
   - '6'
-  - '7'
+  - '8'
 before_install:
   # Log HTTP requests
   - npm config set loglevel http
