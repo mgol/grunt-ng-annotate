@@ -10,6 +10,14 @@
     "rules": {
         // Rules are divided into sections from http://eslint.org/docs/rules/
 
+        // TODO stop overwriting the following rules once support for Node.js 6 is dropped
+        "comma-dangle": ["error", {
+            "arrays": "always-multiline",
+            "objects": "always-multiline",
+            "imports": "always-multiline",
+            "exports": "always-multiline"
+        }],
+
         // TODO stop overwriting the following rules once support for Node.js 4 is dropped
         // Stylistic issues
         "id-blacklist": ["error", "event"],
