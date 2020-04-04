@@ -16,9 +16,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         clean: {
             test: {
-                src: [
-                    'test/tmp',
-                ],
+                src: ['test/tmp'],
             },
         },
 
@@ -27,30 +25,29 @@ module.exports = function (grunt) {
                 options: {
                     sourceMap: 'inline',
                 },
-                files: [{
-                    dest: 'test/tmp/not-annotated-es6.js',
-                    src: 'test/fixtures/not-annotated-es6.js',
-                }],
+                files: [
+                    {
+                        dest: 'test/tmp/not-annotated-es6.js',
+                        src: 'test/fixtures/not-annotated-es6.js',
+                    },
+                ],
             },
         },
 
         copy: {
             testPreparation: {
-                files: [{
-                    dest: 'test/tmp/overwritten.js',
-                    src: 'test/fixtures/not-annotated.js',
-                }],
+                files: [
+                    {
+                        dest: 'test/tmp/overwritten.js',
+                        src: 'test/fixtures/not-annotated.js',
+                    },
+                ],
             },
         },
 
         eslint: {
             all: {
-                src: [
-                    'Gruntfile.js',
-                    'src',
-                    'tasks',
-                    'test',
-                ],
+                src: ['Gruntfile.js', 'src', 'tasks', 'test'],
             },
         },
 
@@ -60,40 +57,48 @@ module.exports = function (grunt) {
                 ngAnnotateOptions: {},
             },
             default: {
-                files: [{
-                    dest: 'test/tmp/partially-annotated-messy-default.js',
-                    src: 'test/fixtures/partially-annotated-messy.js',
-                }],
+                files: [
+                    {
+                        dest: 'test/tmp/partially-annotated-messy-default.js',
+                        src: 'test/fixtures/partially-annotated-messy.js',
+                    },
+                ],
             },
             add: {
                 options: {
                     add: true,
                     remove: false,
                 },
-                files: [{
-                    dest: 'test/tmp/not-annotated.js',
-                    src: 'test/fixtures/not-annotated.js',
-                }],
+                files: [
+                    {
+                        dest: 'test/tmp/not-annotated.js',
+                        src: 'test/fixtures/not-annotated.js',
+                    },
+                ],
             },
             remove: {
                 options: {
                     add: false,
                     remove: true,
                 },
-                files: [{
-                    dest: 'test/tmp/annotated.js',
-                    src: 'test/fixtures/annotated.js',
-                }],
+                files: [
+                    {
+                        dest: 'test/tmp/annotated.js',
+                        src: 'test/fixtures/annotated.js',
+                    },
+                ],
             },
             addRemove: {
                 options: {
                     add: true,
                     remove: true,
                 },
-                files: [{
-                    dest: 'test/tmp/partially-annotated-messy-addremove.js',
-                    src: 'test/fixtures/partially-annotated-messy.js',
-                }],
+                files: [
+                    {
+                        dest: 'test/tmp/partially-annotated-messy-addremove.js',
+                        src: 'test/fixtures/partially-annotated-messy.js',
+                    },
+                ],
             },
             regexp: {
                 options: {
@@ -101,31 +106,37 @@ module.exports = function (grunt) {
                     remove: false,
                     regexp: /^matchedMod$/,
                 },
-                files: [{
-                    dest: 'test/tmp/not-annotated-regexp.js',
-                    src: 'test/fixtures/not-annotated.js',
-                }],
+                files: [
+                    {
+                        dest: 'test/tmp/not-annotated-regexp.js',
+                        src: 'test/fixtures/not-annotated.js',
+                    },
+                ],
             },
             srcDest: {
-                files: [{
-                    dest: 'test/tmp/concatenated.js',
-                    src: [
-                        'test/tmp/not-annotated.js',
-                        'test/tmp/annotated.js',
-                    ],
-                }],
+                files: [
+                    {
+                        dest: 'test/tmp/concatenated.js',
+                        src: [
+                            'test/tmp/not-annotated.js',
+                            'test/tmp/annotated.js',
+                        ],
+                    },
+                ],
             },
             srcDestSeparator: {
                 options: {
                     separator: ';',
                 },
-                files: [{
-                    dest: 'test/tmp/concatenated-separator.js',
-                    src: [
-                        'test/tmp/not-annotated.js',
-                        'test/tmp/annotated.js',
-                    ],
-                }],
+                files: [
+                    {
+                        dest: 'test/tmp/concatenated-separator.js',
+                        src: [
+                            'test/tmp/not-annotated.js',
+                            'test/tmp/annotated.js',
+                        ],
+                    },
+                ],
             },
             singleQuotes: {
                 options: {
@@ -133,10 +144,12 @@ module.exports = function (grunt) {
                     remove: false,
                     singleQuotes: true,
                 },
-                files: [{
-                    dest: 'test/tmp/not-annotated-singlequotes.js',
-                    src: 'test/fixtures/not-annotated.js',
-                }],
+                files: [
+                    {
+                        dest: 'test/tmp/not-annotated-singlequotes.js',
+                        src: 'test/fixtures/not-annotated.js',
+                    },
+                ],
             },
             sourceMap: {
                 options: {
@@ -144,21 +157,26 @@ module.exports = function (grunt) {
                     remove: false,
                     sourceMap: true,
                 },
-                files: [{
-                    dest: 'test/tmp/not-annotated-source-map.js',
-                    src: 'test/fixtures/not-annotated.js',
-                }],
+                files: [
+                    {
+                        dest: 'test/tmp/not-annotated-source-map.js',
+                        src: 'test/fixtures/not-annotated.js',
+                    },
+                ],
             },
             sourceMapNotInline: {
                 options: {
                     add: true,
                     remove: false,
-                    sourceMap: 'test/tmp/not-annotated-source-map-external.js.map',
+                    sourceMap:
+                        'test/tmp/not-annotated-source-map-external.js.map',
                 },
-                files: [{
-                    dest: 'test/tmp/not-annotated-source-map-external.js',
-                    src: 'test/fixtures/not-annotated.js',
-                }],
+                files: [
+                    {
+                        dest: 'test/tmp/not-annotated-source-map-external.js',
+                        src: 'test/fixtures/not-annotated.js',
+                    },
+                ],
             },
             sourceMapCombined: {
                 options: {
@@ -166,19 +184,23 @@ module.exports = function (grunt) {
                     remove: false,
                     sourceMap: true,
                 },
-                files: [{
-                    dest: 'test/tmp/not-annotated-es6-source-map.js',
-                    src: 'test/tmp/not-annotated-es6.js',
-                }],
+                files: [
+                    {
+                        dest: 'test/tmp/not-annotated-es6-source-map.js',
+                        src: 'test/tmp/not-annotated-es6.js',
+                    },
+                ],
             },
             ngAnnotateOptions: {
                 options: {
                     singleQuotes: true,
                 },
-                files: [{
-                    dest: 'test/tmp/not-annotated-ngannotateoptions.js',
-                    src: 'test/fixtures/not-annotated.js',
-                }],
+                files: [
+                    {
+                        dest: 'test/tmp/not-annotated-ngannotateoptions.js',
+                        src: 'test/fixtures/not-annotated.js',
+                    },
+                ],
             },
             multipleFileSources: {
                 options: {
@@ -225,10 +247,7 @@ module.exports = function (grunt) {
     // Load this plugin's task(s).
     grunt.loadTasks('tasks');
 
-    grunt.registerTask('lint', [
-        'eslint',
-    ]);
-
+    grunt.registerTask('lint', ['eslint']);
 
     grunt.registerTask('testPreparation', [
         'copy:testPreparation',
@@ -243,12 +262,12 @@ module.exports = function (grunt) {
         spawn('grunt', ['ngAnnotate', 'test'], {
             cwd: __dirname,
             stdio: 'inherit',
-        }).on('close', code => {
+        }).on('close', (code) => {
             if (code === 0) {
                 done();
                 return;
             }
-            grunt.log.error(`'\`grunt ngAnnotate\` failed with code ${ code }`);
+            grunt.log.error(`'\`grunt ngAnnotate\` failed with code ${code}`);
             done(false);
         });
     });

@@ -11,21 +11,21 @@ const convertSourceMap = require('convert-source-map');
 
 const SourceMapConsumer = sourceMap.SourceMapConsumer;
 
-const readFile = path =>
-    normalizeNewLines(fs.readFileSync(path, {encoding: 'utf8'}));
+const readFile = (path) =>
+    normalizeNewLines(fs.readFileSync(path, { encoding: 'utf8' }));
 
-const normalizeNewLines = input => input
-    .replace(/\r\n/g, '\n')
-    .replace(/\r$/, '');
+const normalizeNewLines = (input) =>
+    input.replace(/\r\n/g, '\n').replace(/\r$/, '');
 
-const readTmp = filename => readFile(`${ __dirname }/../tmp/${ filename }`);
+const readTmp = (filename) => readFile(`${__dirname}/../tmp/${filename}`);
 
-const readFix = filename => readFile(`${ __dirname }/../fixtures/${ filename }`);
+const readFix = (filename) => readFile(`${__dirname}/../fixtures/${filename}`);
 
 describe('grunt-ng-annotate API', () => {
     it('should add annotations by default and not remove ones', () => {
-        expect(readTmp('partially-annotated-messy-default.js'))
-            .to.be(readFix('annotated-messy.js'));
+        expect(readTmp('partially-annotated-messy-default.js')).to.be(
+            readFix('annotated-messy.js'),
+        );
     });
 
     it('should add annotations when `add: true`', () => {
@@ -37,11 +37,15 @@ describe('grunt-ng-annotate API', () => {
     });
 
     it('should both add and remove annotations when `add: true, remove: true`', () => {
-        expect(readTmp('partially-annotated-messy-addremove.js')).to.be(readFix('annotated.js'));
+        expect(readTmp('partially-annotated-messy-addremove.js')).to.be(
+            readFix('annotated.js'),
+        );
     });
 
     it('should annotate only modules matching regexp', () => {
-        expect(readTmp('not-annotated-regexp.js')).to.be(readFix('annotated-regexp.js'));
+        expect(readTmp('not-annotated-regexp.js')).to.be(
+            readFix('annotated-regexp.js'),
+        );
     });
 
     it('should concatenate source files and save into the destination path', () => {
@@ -49,15 +53,21 @@ describe('grunt-ng-annotate API', () => {
     });
 
     it('should concatenate source files with separator and save to destination path', () => {
-        expect(readTmp('concatenated-separator.js')).to.be(readFix('concatenated-separator.js'));
+        expect(readTmp('concatenated-separator.js')).to.be(
+            readFix('concatenated-separator.js'),
+        );
     });
 
     it('should respect the `singleQuotes` setting', () => {
-        expect(readTmp('not-annotated-singlequotes.js')).to.be(readFix('annotated-single.js'));
+        expect(readTmp('not-annotated-singlequotes.js')).to.be(
+            readFix('annotated-single.js'),
+        );
     });
 
     it('should pass the `ngAnnotateOptions` object to ngAnnotate', () => {
-        expect(readTmp('not-annotated-ngannotateoptions.js')).to.be(readFix('annotated-single.js'));
+        expect(readTmp('not-annotated-ngannotateoptions.js')).to.be(
+            readFix('annotated-single.js'),
+        );
     });
 
     it('should pass the correct options when using multiple input sources', () => {
@@ -70,47 +80,67 @@ describe('grunt-ng-annotate API', () => {
     });
 
     describe('source maps', () => {
-        const getSourcePart = source => source.replace(/\n\/\/# sourceMappingURL=\S+/, '');
+        const getSourcePart = (source) =>
+            source.replace(/\n\/\/# sourceMappingURL=\S+/, '');
 
-        it('should generate an inline source map by default', () => {
+        it('should generate an inline source map by default', async () => {
             const generated = readTmp('not-annotated-source-map.js');
-            const existingMap = convertSourceMap.fromSource(generated).toObject();
-            const smc = new SourceMapConsumer(existingMap);
+            const existingMap = convertSourceMap
+                .fromSource(generated)
+                .toObject();
+            const smc = await new SourceMapConsumer(existingMap);
 
             expect(smc.sources).to.eql(['../fixtures/not-annotated.js']);
-            expect(smc.sourcesContent).to.eql([readFix('../fixtures/not-annotated.js')]);
+            expect(smc.sourcesContent).to.eql([
+                readFix('../fixtures/not-annotated.js'),
+            ]);
 
-            expect(getSourcePart(generated).trim()).to.be(readFix('annotated.js').trim());
+            expect(getSourcePart(generated).trim()).to.be(
+                readFix('annotated.js').trim(),
+            );
 
             expect(
                 smc.originalPositionFor({
                     line: 5,
                     column: 63,
-                })).to.eql({
-                    line: 5,
-                    column: 35,
-                    source: smc.sources[0],
-                    name: null,
-                });
+                }),
+            ).to.eql({
+                line: 5,
+                column: 35,
+                source: smc.sources[0],
+                name: null,
+            });
+
+            smc.destroy();
         });
 
-        it('should generate an external source map when asked', () => {
+        it('should generate an external source map when asked', async () => {
             const generated = readTmp('not-annotated-source-map-external.js');
-            const smc = new SourceMapConsumer(readTmp('not-annotated-source-map-external.js.map'));
+            const smc = await new SourceMapConsumer(
+                readTmp('not-annotated-source-map-external.js.map'),
+            );
 
-            expect(getSourcePart(generated).trim()).to.be(readFix('annotated.js').trim());
+            expect(getSourcePart(generated).trim()).to.be(
+                readFix('annotated.js').trim(),
+            );
 
             expect(smc.sources).to.eql(['../fixtures/not-annotated.js']);
             expect(smc.sourcesContent).to.eql([readFix('not-annotated.js')]);
+
+            smc.destroy();
         });
 
-        it('should combine source maps', () => {
+        it('should combine source maps', async () => {
             const generated = readTmp('not-annotated-es6-source-map.js');
 
-            expect(getSourcePart(generated).trim()).to.be(readFix('annotated-es6.js').trim());
+            expect(getSourcePart(generated).trim()).to.be(
+                readFix('annotated-es6.js').trim(),
+            );
 
-            const existingMap = convertSourceMap.fromSource(generated).toObject();
-            const smc = new SourceMapConsumer(existingMap);
+            const existingMap = convertSourceMap
+                .fromSource(generated)
+                .toObject();
+            const smc = await new SourceMapConsumer(existingMap);
 
             expect(smc.sources).to.eql([
                 'not-annotated-es6.js',
@@ -121,12 +151,15 @@ describe('grunt-ng-annotate API', () => {
                 smc.originalPositionFor({
                     line: 9,
                     column: 19,
-                })).to.eql({
-                    line: 8,
-                    column: 22,
-                    source: smc.sources[smc.sources.length - 1],
-                    name: 'uselessConstant',
-                });
+                }),
+            ).to.eql({
+                line: 8,
+                column: 22,
+                source: smc.sources[smc.sources.length - 1],
+                name: 'uselessConstant',
+            });
+
+            smc.destroy();
         });
     });
 });

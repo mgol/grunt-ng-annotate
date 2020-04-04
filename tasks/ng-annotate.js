@@ -13,13 +13,16 @@ const cloneDeep = require('lodash.clonedeep');
 const ngAnnotate = require('ng-annotate');
 
 module.exports = function (grunt) {
-
     const getPathFromTo = (fromFile, toFile) =>
-        path.relative(path.resolve(path.dirname(fromFile)), path.resolve(toFile))
+        path
+            .relative(
+                path.resolve(path.dirname(fromFile)),
+                path.resolve(toFile),
+            )
             // URLs should have UNIX-y paths.
             .replace(/\\+/g, '/');
 
-    const handleOptions = options => {
+    const handleOptions = (options) => {
         const finalOptions = cloneDeep(options);
 
         if (!finalOptions.ngAnnotateOptions) {
@@ -46,7 +49,8 @@ module.exports = function (grunt) {
         }
 
         if (finalOptions.singleQuotes != null) {
-            finalOptions.ngAnnotateOptions.single_quotes = finalOptions.singleQuotes;
+            finalOptions.ngAnnotateOptions.single_quotes =
+                finalOptions.singleQuotes;
             delete finalOptions.singleQuotes;
         }
 
@@ -62,67 +66,72 @@ module.exports = function (grunt) {
         }
 
         if (options.transformDest != null) {
-            grunt.fail.fatal([
-                'The `transformDest` option is no longer supported.',
-                'The following configuration:',
-                '',
-                '    app: {',
-                '        options: {',
-                '            transformDest: function (srcPath) {',
-                '                return doSomethingWithSrcPath(srcPath);',
-                '            },',
-                '        },',
-                '        src: [\'app/*.js\'],',
-                '    },',
-                '',
-                'should be replaced by:',
-                '',
-                '    app: {',
-                '        files: [',
-                '           {',
-                '               expand: true,',
-                '               src: [\'app/*.js\'],',
-                '               rename: function (destPath, srcPath) {',
-                '                   return doSomethingWithSrcPath(srcPath);',
-                '               },',
-                '            },',
-                '        ],',
-                '    },',
-            ].join('\n'));
+            grunt.fail.fatal(
+                [
+                    'The `transformDest` option is no longer supported.',
+                    'The following configuration:',
+                    '',
+                    '    app: {',
+                    '        options: {',
+                    '            transformDest: function (srcPath) {',
+                    '                return doSomethingWithSrcPath(srcPath);',
+                    '            },',
+                    '        },',
+                    "        src: ['app/*.js'],",
+                    '    },',
+                    '',
+                    'should be replaced by:',
+                    '',
+                    '    app: {',
+                    '        files: [',
+                    '           {',
+                    '               expand: true,',
+                    "               src: ['app/*.js'],",
+                    '               rename: function (destPath, srcPath) {',
+                    '                   return doSomethingWithSrcPath(srcPath);',
+                    '               },',
+                    '            },',
+                    '        ],',
+                    '    },',
+                ].join('\n'),
+            );
         }
 
         if (options.outputFileSuffix != null) {
-            grunt.fail.fatal([
-                'The `outputFileSuffix` option is no longer supported.',
-                'The following configuration:',
-                '',
-                '    app: {',
-                '        options: {',
-                '            outputFileSuffix: \'-annotated\',',
-                '        },',
-                '        src: [\'app/*.js\'],',
-                '    },',
-                '',
-                'should be replaced by:',
-                '',
-                '    app: {',
-                '        files: [',
-                '            {',
-                '               expand: true,',
-                '               src: [\'app/*.js\'],',
-                '               rename: function (destPath, srcPath) {',
-                '                   return srcPath + \'-annotated\';',
-                '               },',
-                '            },',
-                '        ],',
-                '    },',
-            ].join('\n'));
+            grunt.fail.fatal(
+                [
+                    'The `outputFileSuffix` option is no longer supported.',
+                    'The following configuration:',
+                    '',
+                    '    app: {',
+                    '        options: {',
+                    "            outputFileSuffix: '-annotated',",
+                    '        },',
+                    "        src: ['app/*.js'],",
+                    '    },',
+                    '',
+                    'should be replaced by:',
+                    '',
+                    '    app: {',
+                    '        files: [',
+                    '            {',
+                    '               expand: true,',
+                    "               src: ['app/*.js'],",
+                    '               rename: function (destPath, srcPath) {',
+                    "                   return srcPath + '-annotated';",
+                    '               },',
+                    '            },',
+                    '        ],',
+                    '    },',
+                ].join('\n'),
+            );
         }
 
         return finalOptions;
     };
 
-    grunt.registerMultiTask('ngAnnotate',
+    grunt.registerMultiTask(
+        'ngAnnotate',
         'Add, remove and rebuild AngularJS dependency injection annotations',
 
         function () {
@@ -131,7 +140,6 @@ module.exports = function (grunt) {
             // Merge task-specific and/or target-specific options with these defaults.
             const options = handleOptions(this.options());
 
-
             const runNgAnnotate = (mapping, options) => {
                 filesNum++;
 
@@ -139,30 +147,42 @@ module.exports = function (grunt) {
 
                 if (ngAnnotateOptions.map) {
                     if (mapping.src.length > 1) {
-                        grunt.fail.fatal('The ngAnnotate task doesn\'t support ' +
-                            'source maps with many-to-one mappings.');
+                        grunt.fail.fatal(
+                            "The ngAnnotate task doesn't support " +
+                                'source maps with many-to-one mappings.',
+                        );
                     }
 
-                    ngAnnotateOptions.map.inFile = getPathFromTo(mapping.dest, mapping.src[0]);
+                    ngAnnotateOptions.map.inFile = getPathFromTo(
+                        mapping.dest,
+                        mapping.src[0],
+                    );
                 }
 
                 // seperator for file concatenation; defaults to linefeed
-                const separator = typeof ngAnnotateOptions.separator === 'string' ?
-                    ngAnnotateOptions.separator :
-                    grunt.util.linefeed;
+                const separator =
+                    typeof ngAnnotateOptions.separator === 'string'
+                        ? ngAnnotateOptions.separator
+                        : grunt.util.linefeed;
 
                 const concatenatedSource = mapping.src
-                    .map(file => grunt.file.read(file))
+                    .map((file) => grunt.file.read(file))
                     .join(separator);
 
-                const ngAnnotateOutput = ngAnnotate(concatenatedSource, ngAnnotateOptions);
+                const ngAnnotateOutput = ngAnnotate(
+                    concatenatedSource,
+                    ngAnnotateOptions,
+                );
 
                 // Write the destination file.
                 if (ngAnnotateOutput.errors) {
-                    grunt.log.write(`Generating "${ mapping.dest }" from: "${
-                        mapping.src.join('", "') }"...`);
+                    grunt.log.write(
+                        `Generating "${mapping.dest}" from: "${mapping.src.join(
+                            '", "',
+                        )}"...`,
+                    );
                     grunt.log.error();
-                    ngAnnotateOutput.errors.forEach(error => {
+                    ngAnnotateOutput.errors.forEach((error) => {
                         grunt.log.error(error);
                     });
                     return false;
@@ -171,9 +191,10 @@ module.exports = function (grunt) {
                 // Write ngAnnotate output (and a source map if requested) to the target file.
 
                 if (ngAnnotateOptions.map && !ngAnnotateOptions.map.inline) {
-                    ngAnnotateOutput.src +=
-                        `\n//# sourceMappingURL=${
-                            getPathFromTo(mapping.dest, options.sourceMap) }`;
+                    ngAnnotateOutput.src += `\n//# sourceMappingURL=${getPathFromTo(
+                        mapping.dest,
+                        options.sourceMap,
+                    )}`;
                     grunt.file.write(options.sourceMap, ngAnnotateOutput.map);
                 }
 
@@ -183,7 +204,7 @@ module.exports = function (grunt) {
             };
 
             // Iterate over all specified file groups.
-            this.files.forEach(mapping => {
+            this.files.forEach((mapping) => {
                 if (!runNgAnnotate(mapping, options)) {
                     validRun = false;
                 }
@@ -193,11 +214,14 @@ module.exports = function (grunt) {
                 if (filesNum < 1) {
                     grunt.log.ok('No files provided to the ngAnnotate task.');
                 } else {
-                    grunt.log.ok(`${ filesNum + (filesNum === 1 ? ' file' : ' files')
-                        } successfully annotated.`);
+                    grunt.log.ok(
+                        `${
+                            filesNum + (filesNum === 1 ? ' file' : ' files')
+                        } successfully annotated.`,
+                    );
                 }
             }
             return validRun;
-        });
-
+        },
+    );
 };

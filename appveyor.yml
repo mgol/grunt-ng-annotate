@@ -4,41 +4,41 @@ clone_depth: 10
 
 # Fix line endings in Windows. (runs before repo cloning)
 init:
-  - git config --global core.autocrlf input
+    - git config --global core.autocrlf input
 
 # Test against these versions of Node.js.
 environment:
-  matrix:
-    - nodejs_version: "10"
-    - nodejs_version: "13"
+    matrix:
+        - nodejs_version: '10'
+        - nodejs_version: '13'
 
 # Install scripts. (runs after repo cloning)
 install:
-  # Get the Node version with matching major & minor numbers
-  - ps: Install-Product node $env:nodejs_version
-  # Typical npm stuff.
-  - npm install
+    # Get the Node version with matching major & minor numbers
+    - ps: Install-Product node $env:nodejs_version
+    # Typical npm stuff.
+    - npm install
 
 # Post-install test scripts.
 test_script:
-  # Output useful info for debugging.
-  - node --version
-  - npm --version
-  - npm test
+    # Output useful info for debugging.
+    - node --version
+    - npm --version
+    - npm test
 
 # Don't actually build.
 build: off
 
 # Finish immediately if one of the jobs fails.
 matrix:
-  fast_finish: true
+    fast_finish: true
 
 # Set up cache, clear it on package.json changes.
 cache:
-  # npm cache.
-  - C:\Users\appveyor\AppData\Roaming\npm-cache -> package.json
-  # Local npm packages.
-  - node_modules -> package.json
+    # npm cache.
+    - C:\Users\appveyor\AppData\Roaming\npm-cache -> package.json
+    # Local npm packages.
+    - node_modules -> package.json
 
 # Set build version format here instead of in the admin panel.
-version: "{build}"
+version: '{build}'

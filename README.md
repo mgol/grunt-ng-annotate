@@ -1,4 +1,5 @@
 # grunt-ng-annotate
+
 > Add, remove and rebuild AngularJS dependency injection annotations. Based on [ng-annotate](https://www.npmjs.org/package/ng-annotate).
 
 [![Build Status](https://travis-ci.org/mgol/grunt-ng-annotate.svg?branch=master)](https://travis-ci.org/mgol/grunt-ng-annotate)
@@ -6,6 +7,7 @@
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 ## Getting Started
+
 This plugin requires Grunt.
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
@@ -34,7 +36,7 @@ grunt.initConfig({
             // Target-specific file lists and/or options go here.
         },
     },
-})
+});
 ```
 
 ## Options
@@ -78,7 +80,7 @@ Default: `false`
 
 ### separator
 
-Concatenated files will be joined on this string. 
+Concatenated files will be joined on this string.
 
 Type: `string`
 
@@ -104,7 +106,6 @@ Type: `object`
 
 Default: `{}`
 
-
 ## Usage Examples
 
 ```js
@@ -126,7 +127,7 @@ grunt.initConfig({
                     expand: true,
                     src: ['f.js'],
                     ext: '.annotated.js', // Dest filepaths will have this extension.
-                    extDot: 'last',       // Extensions in filenames begin after the last dot
+                    extDot: 'last', // Extensions in filenames begin after the last dot
                 },
             ],
         },
@@ -135,7 +136,9 @@ grunt.initConfig({
                 {
                     expand: true,
                     src: ['g.js'],
-                    rename: function (dest, src) { return src + '-annotated'; },
+                    rename: function (dest, src) {
+                        return src + '-annotated';
+                    },
                 },
             ],
         },
@@ -147,13 +150,16 @@ grunt.loadNpmTasks('grunt-ng-annotate');
 
 After executing `grunt ngAnnotate`, you'll get file `a.js` annotated and saved under the same name, file `b.js` annotated and saved as `c.js` and files `d.js` and `e.js` concatenated, annotated and saved as `f.js`. Annotations will be saved using single quotes.
 
-An annotated version of the `f.js` file will be saved as `f.annotated.js` and an annotated version of the `g.js` file will be saved as `g.js-annotated`. 
+An annotated version of the `f.js` file will be saved as `f.annotated.js` and an annotated version of the `g.js` file will be saved as `g.js-annotated`.
 
 ## Supported Node.js versions
+
 This project aims to support all Node.js versions supported upstream (see [Release README](https://github.com/nodejs/Release/blob/master/README.md) for more details).
 
 ## Contributing
+
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## License
+
 Copyright (c) 2014 Michał Gołębiowski-Owczarek. Licensed under the MIT license.
