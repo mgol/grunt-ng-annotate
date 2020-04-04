@@ -1,3 +1,5 @@
+/package-lock.json
+/yarn.lock
 /*.log
 /node_modules/
 /test/tmp
