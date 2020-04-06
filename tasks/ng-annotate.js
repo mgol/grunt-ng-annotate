@@ -9,7 +9,6 @@
 'use strict';
 
 const path = require('path');
-const cloneDeep = require('lodash.clonedeep');
 const ngAnnotate = require('ng-annotate');
 
 module.exports = function (grunt) {
@@ -23,11 +22,12 @@ module.exports = function (grunt) {
             .replace(/\\+/g, '/');
 
     const handleOptions = (options) => {
-        const finalOptions = cloneDeep(options);
-
-        if (!finalOptions.ngAnnotateOptions) {
-            finalOptions.ngAnnotateOptions = {};
-        }
+        const finalOptions = {
+            ...options,
+            ngAnnotateOptions: {
+                ...options.ngAnnotateOptions,
+            },
+        };
 
         if (finalOptions.add == null) {
             finalOptions.ngAnnotateOptions.add = true;
@@ -143,7 +143,16 @@ module.exports = function (grunt) {
             const runNgAnnotate = (mapping, options) => {
                 filesNum++;
 
-                const ngAnnotateOptions = cloneDeep(options.ngAnnotateOptions);
+                const ngAnnotateOptions = {
+                    ...options.ngAnnotateOptions,
+                    ...(options.ngAnnotateOptions.map
+                        ? {
+                              map: {
+                                  ...options.ngAnnotateOptions.map,
+                              },
+                          }
+                        : {}),
+                };
 
                 if (ngAnnotateOptions.map) {
                     if (mapping.src.length > 1) {
