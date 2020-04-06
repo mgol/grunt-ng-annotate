@@ -2,6 +2,8 @@
 
 > Add, remove and rebuild AngularJS dependency injection annotations. Based on [ng-annotate](https://www.npmjs.org/package/ng-annotate).
 
+**NOTE: `grunt-ng-annotate` is no longer developed similarly to the underlying [ng-annotate](https://www.npmjs.com/package/ng-annotate) package. Switch to [babel-plugin-angularjs-annotate](https://www.npmjs.com/package/babel-plugin-angularjs-annotate) or provide annotations by yourself.**
+
 [![Build Status](https://travis-ci.org/mgol/grunt-ng-annotate.svg?branch=master)](https://travis-ci.org/mgol/grunt-ng-annotate)
 [![Build status](https://ci.appveyor.com/api/projects/status/rr3i854ic8rb47i5/branch/master?svg=true)](https://ci.appveyor.com/project/mgol/grunt-ng-annotate/branch/master)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
